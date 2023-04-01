@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hrd/src/app_router.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
+import 'package:hrd/src/common/utility/dartdroid_font.dart';
 import 'package:hrd/src/core/bloc/authentication/authentication.dart';
 import 'package:hrd/src/core/bloc/connection/connection.dart';
 import 'package:hrd/src/core/service/connection/base_connection_service.dart';
@@ -38,7 +39,7 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) => ConnectionCubit(
               connectionService: connectionService,
-            ),
+            )..initialize(),
           ),
         ],
         child: const DartdroidApp(),
@@ -70,12 +71,12 @@ class _DartdroidAppState extends State<DartdroidApp> {
               if (state == ConnectionStatus.offline) {
                 return Container(
                   height: 40,
-                  color: ISafeColor.red,
+                  color: DartdroidColor.red,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   child: Center(
                     child: Text(
                       'Tidak Ada Koneksi Internet',
-                      style: ISafeFont.regular14(color: Colors.white),
+                      style: DartdroidFont.regular14(color: Colors.white),
                     ),
                   ),
                 );
