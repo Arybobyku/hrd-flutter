@@ -36,7 +36,9 @@ class App extends StatelessWidget {
             create: (context) => AuthenticationActionCubit(),
           ),
           BlocProvider(
-            create: (context) => ConnectionCubit(),
+            create: (context) => ConnectionCubit(
+              connectionService: connectionService,
+            ),
           ),
         ],
         child: const DartdroidApp(),
