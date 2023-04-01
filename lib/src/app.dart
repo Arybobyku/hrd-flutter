@@ -5,19 +5,24 @@ import 'package:hrd/src/app_router.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/common/utility/dartdroid_font.dart';
-import 'package:hrd/src/core/bloc/authentication/authentication.dart';
-import 'package:hrd/src/core/bloc/connection/connection.dart';
-import 'package:hrd/src/core/service/connection/base_connection_service.dart';
+
+import 'core/core.dart';
 
 class App extends StatelessWidget {
   final Connectivity connectivity;
 
+  /// SERVICE
   final BaseConnectionService connectionService;
+
+  /// REPOSITORY
+  final BaseAuthenticationRepository authenticationRepository;
+
 
   const App({
     Key? key,
     required this.connectivity,
     required this.connectionService,
+    required this.authenticationRepository
   }) : super(key: key);
 
   @override
@@ -30,11 +35,14 @@ class App extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => AuthenticationDataCubit(
+              authenticationRepository: authenticationRepository,
               clock: clock,
             ),
           ),
           BlocProvider(
-            create: (context) => AuthenticationActionCubit(),
+            create: (context) => AuthenticationActionCubit(
+              authenticationRepository: authenticationRepository,
+            ),
           ),
           BlocProvider(
             create: (context) => ConnectionCubit(
@@ -57,11 +65,13 @@ class DartdroidApp extends StatefulWidget {
 
 class _DartdroidAppState extends State<DartdroidApp> {
   final AppRouter _appRouter = AppRouter();
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorKey: _navigatorKey,
       initialRoute: RouteName.splashScreen,
       onGenerateRoute: _appRouter.onGenerateRoute,
       builder: (BuildContext context, Widget? child) {
@@ -87,8 +97,22 @@ class _DartdroidAppState extends State<DartdroidApp> {
           ),
           body: MultiBlocListener(
             listeners: [
-              BlocListener(
-                listener: (context, state) {},
+              BlocListener<AuthenticationDataCubit, BaseState>(
+                listener: (context, state) {
+                  if (state is UnauthenticatedState) {
+                    _navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                      RouteName.loginScreen,
+                      (route) => false,
+                    );
+                  }
+
+                  if (state is AuthenticatedState) {
+                    _navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                      RouteName.landingScreen,
+                      (route) => false,
+                    );
+                  }
+                },
               ),
             ],
             child: BlocBuilder<AuthenticationDataCubit, BaseState>(

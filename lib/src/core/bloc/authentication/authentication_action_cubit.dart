@@ -1,23 +1,24 @@
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
 
+import '../../core.dart';
+
 class AuthenticationActionCubit extends Cubit<BaseState<AuthMeta>> {
-  AuthenticationActionCubit() : super(InitializedState());
+  final BaseAuthenticationRepository authenticationRepository;
+
+  AuthenticationActionCubit({
+    required this.authenticationRepository,
+  }) : super(InitializedState());
 
   //TODO: SIGN IN
-  void signIn(){
+  void signIn() {}
 
-  }
   //TODO: SIGN OUT
-  void  signOut(){
+  void signOut() {}
 
-  }
   //TODO:  RESET PASSWORD
-  void resetPassword(){
+  void resetPassword() {}
 
-  }
   //TODO: SET PASSWORD
-  void setPassword(){
-
-  }
+  void setPassword() {}
 }

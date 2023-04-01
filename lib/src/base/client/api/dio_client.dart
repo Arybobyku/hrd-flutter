@@ -11,10 +11,16 @@ class DioClient extends BaseApiClient {
 
   static final DioClient _instance = DioClient._();
 
-  factory DioClient({Alice? alice}) {
+  static const int _defaultMsTimeout = 10000;
+
+  factory DioClient({Alice? alice, int? msTimeout}) {
     if (alice != null) {
       _instance._dio.interceptors.add(alice.getDioInterceptor());
     }
+
+    _instance._dio.options.connectTimeout = msTimeout ?? _defaultMsTimeout;
+    _instance._dio.options.sendTimeout = msTimeout ?? _defaultMsTimeout;
+    _instance._dio.options.receiveTimeout = msTimeout ?? _defaultMsTimeout;
 
     return _instance;
   }

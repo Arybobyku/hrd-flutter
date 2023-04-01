@@ -1,10 +1,10 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hrd/src/app.dart';
+import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
-import 'package:hrd/src/core/service/connection/base_connection_service.dart';
+import 'package:hrd/src/core/core.dart';
 import 'package:hrd/src/ui/widget/banner/dartdroid_banner_card.dart';
 
 void main() async {
@@ -14,9 +14,20 @@ void main() async {
 
   final Connectivity connectivity = Connectivity();
 
+  final BaseApiClient apiClient = DioClient(
+    // alice: EnvConfig.env != 'PROD' ? _alice : null,
+    msTimeout: EnvConfig.defaultMsTimeout,
+  );
+
   // Service
   final BaseConnectionService connectionService = ConnectionService(
     connectivity: connectivity,
+  );
+
+  // Repository
+  final BaseAuthenticationRepository authenticationRepository =
+      AuthenticationRepository(
+    apiClient: apiClient,
   );
 
   // Disable Landscape Mode
@@ -36,6 +47,7 @@ void main() async {
       child: App(
         connectivity: connectivity,
         connectionService: connectionService,
+        authenticationRepository: authenticationRepository,
       ),
     ),
   );

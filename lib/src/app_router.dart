@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hrd/src/base/bloc/bloc.dart';
-import 'package:hrd/src/ui/screen/auth/auth.dart';
-import 'package:hrd/src/ui/screen/splash_screen/splash_screen.dart';
+import 'package:hrd/src/ui/screen/screen.dart';
 
 import 'common/common.dart';
 
@@ -53,6 +52,19 @@ class AppRouter {
                 )
               : const SplashScreen(),
         );
+      case RouteName.landingScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.splashScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const LandingScreen(),
+                )
+              : const LandingScreen(),
+        );
 
       default:
         return MaterialPageRoute(
@@ -71,5 +83,6 @@ class RouteName {
   static const String splashScreen = "splashScreen";
   static const String loginScreen = "loginScreen";
   static const String registerScreen = "registerScreen";
+  static const String landingScreen = "landingScreen";
   static const String notFoundScreen = "notFoundScreen";
 }
