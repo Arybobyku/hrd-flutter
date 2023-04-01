@@ -1,12 +1,13 @@
 part of 'base_authentication_repository.dart';
 
 class AuthenticationRepository implements BaseAuthenticationRepository {
-
+  final BaseLocalStorageClient localStorageClient;
   final BaseApiClient apiClient;
 
   AuthenticationRepository({
-    required this.apiClient
-});
+    required this.apiClient,
+    required this.localStorageClient,
+  });
 
   @override
   Future<String?> getFcmTokenFromServer() {
@@ -51,7 +52,8 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
   }
 
   @override
-  Future<User?> signIn({required String userName, required String password}) async{
+  Future<User?> signIn(
+      {required String userName, required String password}) async {
     Response response = await apiClient.post(
       Url.baseUrl + Url.login,
       data: {
@@ -70,15 +72,18 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
   }
 
   @override
-  Future subscribePushNotification({required String fcmToken, required String token}) {
+  Future subscribePushNotification(
+      {required String fcmToken, required String token}) {
     // TODO: implement subscribePushNotification
     throw UnimplementedError();
   }
 
   @override
-  Future unsubscribePushNotification({required String fcmToken, required String iSafeNo, required String token}) {
+  Future unsubscribePushNotification(
+      {required String fcmToken,
+      required String iSafeNo,
+      required String token}) {
     // TODO: implement unsubscribePushNotification
     throw UnimplementedError();
   }
-
 }

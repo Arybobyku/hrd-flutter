@@ -11,7 +11,9 @@ class AuthenticationActionCubit extends Cubit<BaseState<AuthMeta>> {
   }) : super(InitializedState());
 
   //TODO: SIGN IN
-  void signIn() {}
+  void signIn() {
+
+  }
 
   //TODO: SIGN OUT
   void signOut() {}

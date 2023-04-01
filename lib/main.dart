@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hrd/src/app.dart';
 import 'package:hrd/src/base/base.dart';
+import 'package:hrd/src/base/client/local_storage/base_local_storage_client.dart';
+import 'package:hrd/src/base/client/local_storage/local_storage_client.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/core/core.dart';
 import 'package:hrd/src/ui/widget/banner/dartdroid_banner_card.dart';
@@ -19,6 +21,8 @@ void main() async {
     msTimeout: EnvConfig.defaultMsTimeout,
   );
 
+  final BaseLocalStorageClient localStorageClient = SharedPrefClient.instance;
+
   // Service
   final BaseConnectionService connectionService = ConnectionService(
     connectivity: connectivity,
@@ -28,6 +32,7 @@ void main() async {
   final BaseAuthenticationRepository authenticationRepository =
       AuthenticationRepository(
     apiClient: apiClient,
+    localStorageClient: localStorageClient,
   );
 
   // Disable Landscape Mode
