@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hrd/src/app.dart';
 import 'package:hrd/src/common/common.dart';
+import 'package:hrd/src/core/service/connection/base_connection_service.dart';
 import 'package:hrd/src/ui/widget/banner/dartdroid_banner_card.dart';
 
 void main() async {
@@ -11,7 +12,12 @@ void main() async {
   //TODO:
   // Bloc.observer = MainBlocObserver(loggerClient: _loggerClient);
 
-  final Connectivity _connectivity = Connectivity();
+  final Connectivity connectivity = Connectivity();
+
+  // Service
+  final BaseConnectionService connectionService = ConnectionService(
+    connectivity: connectivity,
+  );
 
   // Disable Landscape Mode
   SystemChrome.setPreferredOrientations(
@@ -28,7 +34,8 @@ void main() async {
       env: EnvConfig.env,
       tag: EnvConfig.envTag,
       child: App(
-        connectivity: _connectivity,
+        connectivity: connectivity,
+        connectionService: connectionService,
       ),
     ),
   );
