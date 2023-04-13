@@ -12,6 +12,7 @@ class EnvConfig {
   );
   static const baseUrl = String.fromEnvironment(
     'BASE_URL',
+    defaultValue: ''
   );
 
   static get uriBaseUrl => Uri.parse(baseUrl);

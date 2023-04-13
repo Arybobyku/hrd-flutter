@@ -16,10 +16,10 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
   }
 
   @override
-  Future getProfileFromLocalStorage() {
-    // TODO: implement getProfileFromLocalStorage
-    throw UnimplementedError();
-  }
+  Future getUSerFromLocalStorage() => localStorageClient.getByKey(
+        SharedPrefKey.user,
+        SharedPrefType.STRING,
+      );
 
   @override
   Future<void> removeFcmTokenFromServer() {
@@ -81,7 +81,7 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
   @override
   Future unsubscribePushNotification(
       {required String fcmToken,
-      required String iSafeNo,
+      required String userID,
       required String token}) {
     // TODO: implement unsubscribePushNotification
     throw UnimplementedError();

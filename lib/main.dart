@@ -11,17 +11,18 @@ import 'package:hrd/src/ui/widget/banner/dartdroid_banner_card.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //TODO:
-  // Bloc.observer = MainBlocObserver(loggerClient: _loggerClient);
 
   final Connectivity connectivity = Connectivity();
+
+  final BaseLocalStorageClient localStorageClient = SharedPrefClient.instance;
 
   final BaseApiClient apiClient = DioClient(
     // alice: EnvConfig.env != 'PROD' ? _alice : null,
     msTimeout: EnvConfig.defaultMsTimeout,
+    localStorageClient: localStorageClient,
   );
 
-  final BaseLocalStorageClient localStorageClient = SharedPrefClient.instance;
+  final BaseLoggerClient loggerClient = LoggerClient();
 
   // Service
   final BaseConnectionService connectionService = ConnectionService(
@@ -45,15 +46,20 @@ void main() async {
     SystemUiOverlayStyle.light,
   );
 
-  runApp(
-    DartdroidBannerCard(
-      env: EnvConfig.env,
-      tag: EnvConfig.envTag,
-      child: App(
-        connectivity: connectivity,
-        connectionService: connectionService,
-        authenticationRepository: authenticationRepository,
+  BlocOverrides.runZoned(
+    () => runApp(
+      DartdroidBannerCard(
+        env: EnvConfig.env,
+        tag: EnvConfig.envTag,
+        child: App(
+          connectivity: connectivity,
+          connectionService: connectionService,
+          authenticationRepository: authenticationRepository,
+        ),
       ),
+    ),
+    blocObserver: MainBlocObserver(
+      loggerClient: loggerClient,
     ),
   );
 }

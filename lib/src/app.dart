@@ -17,13 +17,12 @@ class App extends StatelessWidget {
   /// REPOSITORY
   final BaseAuthenticationRepository authenticationRepository;
 
-
-  const App({
-    Key? key,
-    required this.connectivity,
-    required this.connectionService,
-    required this.authenticationRepository
-  }) : super(key: key);
+  const App(
+      {Key? key,
+      required this.connectivity,
+      required this.connectionService,
+      required this.authenticationRepository})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class App extends StatelessWidget {
             create: (context) => AuthenticationDataCubit(
               authenticationRepository: authenticationRepository,
               clock: clock,
-            ),
+            )..initialize(),
           ),
           BlocProvider(
             create: (context) => AuthenticationActionCubit(
@@ -63,18 +62,30 @@ class DartdroidApp extends StatefulWidget {
   State<DartdroidApp> createState() => _DartdroidAppState();
 }
 
-class _DartdroidAppState extends State<DartdroidApp> {
+class _DartdroidAppState extends State<DartdroidApp>
+    with WidgetsBindingObserver {
   final AppRouter _appRouter = AppRouter();
-  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+  final _navKey = GlobalKey<NavigatorState>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    // Initialize connection listener
+
+    context.read<ConnectionCubit>()
+      ..initialize()
+      ..periodicCheck();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      navigatorKey: _navigatorKey,
+      navigatorKey: _navKey,
       initialRoute: RouteName.splashScreen,
       onGenerateRoute: _appRouter.onGenerateRoute,
-      builder: (BuildContext context, Widget? child) {
+      builder: (BuildContext materialContext, Widget? child) {
         return Scaffold(
           bottomNavigationBar: BlocBuilder<ConnectionCubit, ConnectionStatus>(
             builder: (context, state) {
@@ -100,14 +111,14 @@ class _DartdroidAppState extends State<DartdroidApp> {
               BlocListener<AuthenticationDataCubit, BaseState>(
                 listener: (context, state) {
                   if (state is UnauthenticatedState) {
-                    _navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                    _navKey.currentState!.pushNamedAndRemoveUntil(
                       RouteName.loginScreen,
                       (route) => false,
                     );
                   }
 
                   if (state is AuthenticatedState) {
-                    _navigatorKey.currentState!.pushNamedAndRemoveUntil(
+                    _navKey.currentState!.pushNamedAndRemoveUntil(
                       RouteName.landingScreen,
                       (route) => false,
                     );
@@ -115,11 +126,7 @@ class _DartdroidAppState extends State<DartdroidApp> {
                 },
               ),
             ],
-            child: BlocBuilder<AuthenticationDataCubit, BaseState>(
-              builder: (context, state) {
-                return Container();
-              },
-            ),
+            child: child!,
           ),
         );
       },

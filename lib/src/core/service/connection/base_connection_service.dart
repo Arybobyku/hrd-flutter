@@ -7,7 +7,6 @@ import 'package:hrd/src/common/common.dart';
 part 'connection_service.dart';
 
 abstract class BaseConnectionService {
-  Future<ConnectionStatus> lookup();
 
   Future<bool> canConnect();
 

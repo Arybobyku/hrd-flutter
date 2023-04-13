@@ -1,11 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:hrd/src/common/common.dart';
 
 import 'logger.dart';
 
-/// Logging to console or firebase crashlytics
-class LoggerClient extends BaseLoggerClient {
+class LoggerClient extends BaseLoggerClient with LogMixin{
   LoggerClient();
 
   @override
@@ -17,14 +17,14 @@ class LoggerClient extends BaseLoggerClient {
     dynamic exception = '-',
     dynamic stackTrace = '-',
     bool sendCrashlytics = true,
-    bool sendToServer = true,
+    bool sendToServer = false,
   }) async {
     String date = DateTime.now().toIso8601String();
 
     String fullMessage =
         "[$tag: $date]\n Class: $className \n Function: $functionName \n Message: $message \n Exception: $exception \n Stack trace: $stackTrace";
 
-    log(fullMessage);
+    logD(fullMessage);
 
     if (sendToServer) {
       try {

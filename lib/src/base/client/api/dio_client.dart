@@ -1,31 +1,46 @@
 import 'dart:async';
 
-import 'package:alice/alice.dart';
 import 'package:dio/dio.dart';
+import 'package:hrd/src/base/client/local_storage/base_local_storage_client.dart';
+import 'package:hrd/src/common/common.dart';
+import 'package:hrd/src/common/constant/share_pref_key.dart';
 
 import '../../common/exception.dart';
 import 'base_api_client.dart';
 
-class DioClient extends BaseApiClient {
-  DioClient._();
+class DioClient extends BaseApiClient with LogMixin {
+  static const int _defaultMsTimeout = 20000;
+  final BaseLocalStorageClient localStorageClient;
 
-  static final DioClient _instance = DioClient._();
-
-  static const int _defaultMsTimeout = 10000;
-
-  factory DioClient({Alice? alice, int? msTimeout}) {
-    if (alice != null) {
-      _instance._dio.interceptors.add(alice.getDioInterceptor());
-    }
-
-    _instance._dio.options.connectTimeout = msTimeout ?? _defaultMsTimeout;
-    _instance._dio.options.sendTimeout = msTimeout ?? _defaultMsTimeout;
-    _instance._dio.options.receiveTimeout = msTimeout ?? _defaultMsTimeout;
-
-    return _instance;
+  DioClient({int? msTimeout,required this.localStorageClient}) {
+    _dio.options.connectTimeout = msTimeout ?? _defaultMsTimeout;
+    _dio.options.sendTimeout = msTimeout ?? _defaultMsTimeout;
+    _dio.options.receiveTimeout = msTimeout ?? _defaultMsTimeout;
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (requestOptions, requestInterceptorHandler) {
+          logI("${DateTime.now()} ${requestOptions.method} : ${requestOptions.baseUrl+requestOptions.path} \n ${requestOptions.queryParameters}");
+        },
+        onResponse: (response, responseInterceptorHandler) {
+          logI("${DateTime.now()} ${response.statusCode} : ${response.data}");
+        },
+        onError:(dioError,errorInterceptorHandler) => errorInterceptor(dioError,errorInterceptorHandler),
+      ),
+    );
   }
 
-  Dio _dio = Dio();
+  final Dio _dio = Dio();
+
+  dynamic errorInterceptor(DioError dioError,ErrorInterceptorHandler errorInterceptorHandler) async{
+    final token = await localStorageClient.getByKey(SharedPrefKey.token, SharedPrefType.STRING);
+
+    if(token!=null && dioError.response?.statusCode == 401){
+      logD("REFRESH TOKEN");
+
+    }
+
+    return dioError;
+  }
 
   @override
   Future<Response> get(
@@ -48,13 +63,13 @@ class DioClient extends BaseApiClient {
     _dio.options.receiveTimeout = msTimeout;
 
     try {
-      final _response = await _dio.get(
+      final response = await _dio.get(
         url,
         options: Options(headers: _headers, responseType: responseType),
         queryParameters: queryParams,
       );
 
-      return _returnResponse(_response);
+      return _returnResponse(response);
     } on DioError catch (e) {
       if (e.type == DioErrorType.connectTimeout) {
         throw TimeoutException(e.error);

@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/base/client/local_storage/base_local_storage_client.dart';
 import 'package:hrd/src/common/common.dart';
+import 'package:hrd/src/common/constant/share_pref_key.dart';
 
 part 'authentication_repository.dart';
 
 abstract class BaseAuthenticationRepository {
-  /// Sign in using iSafe credentials
   Future<User?> signIn({
     required String userName,
     required String password,
@@ -36,7 +36,7 @@ abstract class BaseAuthenticationRepository {
   /// Unsubscribe push notification to FCM
   Future unsubscribePushNotification({
     required String fcmToken,
-    required String iSafeNo,
+    required String userID,
     required String token,
   });
 
@@ -48,7 +48,7 @@ abstract class BaseAuthenticationRepository {
 
   Future<void> saveUserToLocalStorage(User user);
 
-  Future<dynamic> getProfileFromLocalStorage();
+  Future<dynamic> getUSerFromLocalStorage();
 
   Future<void> resetLocalStorage();
 }

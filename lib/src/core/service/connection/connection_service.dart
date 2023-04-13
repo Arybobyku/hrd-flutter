@@ -9,7 +9,6 @@ class ConnectionService implements BaseConnectionService {
   Future<bool> canConnect() async {
     final ConnectivityResult connectResult =
         await connectivity.checkConnectivity();
-
     if (connectResult == ConnectivityResult.none) {
       return false;
     }
@@ -25,14 +24,4 @@ class ConnectionService implements BaseConnectionService {
     bool? cancelOnError,
   }) get listen => connectivity.onConnectivityChanged.listen;
 
-  @override
-  Future<ConnectionStatus> lookup() async {
-    try {
-      await InternetAddress.lookup(EnvConfig.uriBaseUrl.host);
-
-      return ConnectionStatus.online;
-    } catch (e) {
-      return ConnectionStatus.offline;
-    }
-  }
 }

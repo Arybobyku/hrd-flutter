@@ -36,19 +36,15 @@ class ConnectionCubit extends Cubit<ConnectionStatus> {
   void singleCheck() async {
     final canConnect = await connectionService.canConnect();
 
-    if (!canConnect) {
+    if (canConnect) {
+      emit(ConnectionStatus.online);
+    }else{
       emit(ConnectionStatus.offline);
     }
-
-    final lookupResult = await connectionService.lookup();
-
-    emit(lookupResult);
   }
 
   void periodicCheck({Duration duration = const Duration(seconds: 12)}) async {
     if (_timer != null) {
-      debugPrint('WARNING : Has been already started. Terminating timer');
-
       _timer!.cancel();
       _timer = null;
     }

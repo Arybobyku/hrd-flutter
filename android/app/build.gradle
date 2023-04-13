@@ -21,11 +21,43 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+} else {
+    // Release
+    keystoreProperties.setProperty('keyAlias', System.getenv('KEY_ALIAS'));
+    keystoreProperties.setProperty('storePassword', System.getenv('KEYSTORE_PASSWORD'));
+    keystoreProperties.setProperty('keyPassword', System.getenv('KEY_PASSWORD'));
+    keystoreProperties.setProperty('storeFile', System.getenv('KEYSTORE_FILE_PATH'));
+
+}
+
+def dartEnvironmentVariables = [
+        ENV: 'DEV',
+        PACKAGE_SUFFIX: '',
+        GOOGLEMAP_API_KEY: '',
+];
+if (project.hasProperty('dart-defines')) {
+    dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
+            .split(',')
+            .collectEntries { entry ->
+                def pair = URLDecoder.decode(entry).split('=')
+                [(pair.first()): pair.last()]
+            }
+}
+
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -47,17 +79,55 @@ android {
         applicationId "com.example.hrd"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        ndk {
+            abiFilters "x86", "x86_64", "armeabi-v7a", "arm64-v8a", "armeabi"
+        }
+    }
+
+    flavorDimensions "environment"
+    productFlavors {
+        dev {
+            dimension "environment"
+            applicationIdSuffix ".dev"
+        }
+        prod {
+            dimension "environment"
+        }
+    }
+
+    signingConfigs {
+        debug {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+            storePassword keystoreProperties['storePassword']
+        }
     }
 
     buildTypes {
+        debug {
+            productFlavors.dev.signingConfig signingConfigs.debug
+            productFlavors.prod.signingConfig signingConfigs.release
+        }
+        profile {
+            productFlavors.dev.signingConfig signingConfigs.debug
+            productFlavors.prod.signingConfig signingConfigs.release
+        }
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            productFlavors.dev.signingConfig signingConfigs.debug
+            productFlavors.prod.signingConfig signingConfigs.release
         }
     }
 }

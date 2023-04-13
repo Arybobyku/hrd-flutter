@@ -12,7 +12,12 @@ class AuthenticationDataCubit extends Cubit<BaseState> {
     required this.authenticationRepository,
 }) : super(InitializedState());
   //TODO: INITIALIZE
-  void initialize(){
+  void initialize()async{
 
+    final user = await authenticationRepository.getUSerFromLocalStorage();
+
+    if(user==null){
+      emit(UnauthenticatedState());
+    }
   }
 }

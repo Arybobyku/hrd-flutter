@@ -10,6 +10,7 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: DartdroidColor.blueDarken20,
       body: Container(
+        height: double.infinity,
         child: Image.asset(DartdroidPath.logo),
       ),
     );
