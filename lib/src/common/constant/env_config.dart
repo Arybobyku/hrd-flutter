@@ -12,14 +12,14 @@ class EnvConfig {
   );
   static const baseUrl = String.fromEnvironment(
     'BASE_URL',
-    defaultValue: ''
+    defaultValue: 'http://192.168.1.2/hrd-web/public/api'
   );
 
   static get uriBaseUrl => Uri.parse(baseUrl);
 
   static const defaultMsTimeout = int.fromEnvironment(
     'DEFAULT_MS_TIMEOUT',
-    defaultValue: 30000,
+    defaultValue: 16000,
   );
 
   static const sentryDsn = String.fromEnvironment(

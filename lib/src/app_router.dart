@@ -55,7 +55,7 @@ class AppRouter {
       case RouteName.landingScreen:
         return MaterialPageRoute(
           settings: RouteSettings(
-            name: RouteName.splashScreen,
+            name: RouteName.landingScreen,
             arguments: args?.data,
           ),
           builder: (_) => args?.bloc != null
@@ -64,6 +64,20 @@ class AppRouter {
                   child: const LandingScreen(),
                 )
               : const LandingScreen(),
+        );
+
+        case RouteName.dashboardScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.dashboardScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const DashboardScreen(),
+                )
+              : const DashboardScreen(),
         );
 
       default:
@@ -84,5 +98,6 @@ class RouteName {
   static const String loginScreen = "loginScreen";
   static const String registerScreen = "registerScreen";
   static const String landingScreen = "landingScreen";
+  static const String dashboardScreen = "dashboardScreen";
   static const String notFoundScreen = "notFoundScreen";
 }

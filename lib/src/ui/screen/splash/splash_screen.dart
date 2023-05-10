@@ -8,7 +8,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DartdroidColor.blueDarken20,
+      backgroundColor: DartdroidColor.primary,
       body: Container(
         height: double.infinity,
         child: Image.asset(DartdroidPath.logo),

@@ -28,6 +28,11 @@ class UnauthorizedException extends AppException {
   UnauthorizedException(data) : super(data, "[ERROR] Unauthorized: ");
 }
 
+/// HTTP exception for error status 402
+class BadAuthException extends AppException {
+  BadAuthException(data) : super(data, "[ERROR] Unauthorized: ");
+}
+
 /// HTTP exception for error status 403
 class ForbiddenException extends AppException {
   ForbiddenException(data) : super(data, "[ERROR] Forbidden: ");

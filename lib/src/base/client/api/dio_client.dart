@@ -12,34 +12,42 @@ class DioClient extends BaseApiClient with LogMixin {
   static const int _defaultMsTimeout = 20000;
   final BaseLocalStorageClient localStorageClient;
 
-  DioClient({int? msTimeout,required this.localStorageClient}) {
+  final Dio _dio = Dio();
+
+  DioClient({int? msTimeout, required this.localStorageClient}) {
     _dio.options.connectTimeout = msTimeout ?? _defaultMsTimeout;
     _dio.options.sendTimeout = msTimeout ?? _defaultMsTimeout;
     _dio.options.receiveTimeout = msTimeout ?? _defaultMsTimeout;
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (requestOptions, requestInterceptorHandler) {
-          logI("${DateTime.now()} ${requestOptions.method} : ${requestOptions.baseUrl+requestOptions.path} \n ${requestOptions.queryParameters}");
+          logI(
+              "${DateTime.now()} ${requestOptions.headers} \n ${requestOptions.method} : ${requestOptions.baseUrl + requestOptions.path} \n ${requestOptions.queryParameters}");
+          requestInterceptorHandler.next(requestOptions);
         },
         onResponse: (response, responseInterceptorHandler) {
           logI("${DateTime.now()} ${response.statusCode} : ${response.data}");
+          responseInterceptorHandler.next(response);
         },
-        onError:(dioError,errorInterceptorHandler) => errorInterceptor(dioError,errorInterceptorHandler),
+        onError: (dioError, errorInterceptorHandler) {
+          errorInterceptor(dioError, errorInterceptorHandler);
+        },
       ),
     );
   }
 
-  final Dio _dio = Dio();
+  errorInterceptor(DioError dioError,
+      ErrorInterceptorHandler errorInterceptorHandler) async {
+    logE("${DateTime.now()} ${dioError.type} : ${dioError.error}");
 
-  dynamic errorInterceptor(DioError dioError,ErrorInterceptorHandler errorInterceptorHandler) async{
-    final token = await localStorageClient.getByKey(SharedPrefKey.token, SharedPrefType.STRING);
+    final token = await localStorageClient.getByKey(
+        SharedPrefKey.token, SharedPrefType.STRING);
 
-    if(token!=null && dioError.response?.statusCode == 401){
+    if (token != null && dioError.response?.statusCode == 401) {
       logD("REFRESH TOKEN");
-
     }
 
-    return dioError;
+    errorInterceptorHandler.next(dioError);
   }
 
   @override
@@ -282,6 +290,8 @@ _returnResponse(Response? response) {
       throw ForbiddenException(response);
     case 404:
       throw NotFoundException(response);
+    case 422:
+      throw BadAuthException(response);
     case 500:
       throw InternalServerErrorException(response);
     case 503:

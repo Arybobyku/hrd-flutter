@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/base/client/local_storage/base_local_storage_client.dart';

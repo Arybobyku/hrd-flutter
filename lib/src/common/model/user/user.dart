@@ -10,6 +10,7 @@ class User extends Equatable {
   @JsonKey(name: "email") final String? email;
   @JsonKey(name: "nip") final String? nip;
   @JsonKey(name: "role") final int? role;
+  @JsonKey(name: "token") final int? token;
 
   const User({
     this.id,
@@ -17,6 +18,7 @@ class User extends Equatable {
     this.email,
     this.nip,
     this.role,
+    this.token,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

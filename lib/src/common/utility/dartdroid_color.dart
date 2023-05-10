@@ -61,27 +61,6 @@ class DartdroidColor {
   ///
   static const Color yellowLighten3 = Color(0xFFF9EFBE);
 
-  /// primary
-  static const Color maroon = Color(0xFF8D0C0C);
-
-  /// primaryDark
-  static const Color maroonDarken10 = Color(0xFF6C000D);
-
-  /// primaryLighten1
-  static const Color red = Color(0xFFD7001A);
-
-  /// primaryProfile
-  static const Color redDarken10 = Color(0xFFB42727);
-
-  /// primaryLighten5
-  static const Color redDarken20 = Color(0xFFB51E1E);
-
-  /// primaryLighten6
-  static const Color redLighten10 = Color(0xFFFA1511);
-
-  /// primaryLighten2
-  static const Color redLighten20 = Color(0xFFE32538);
-
   /// primaryLighten2RGBA
   static const Color redLighten25 = Color(0xFFE32538);
 
@@ -166,7 +145,7 @@ class DartdroidColor {
   static const Color blueDarken10 = Color(0xFF4276DD);
 
   /// blueDarken
-  static const Color blueDarken20 = Color(0xFF0066FF);
+  static const Color primary = Color(0xFF0066FF);
 
   /// blueLightDarken
   static const Color blueLightDarken = Color(0xFF34A8BF);
@@ -180,17 +159,8 @@ class DartdroidColor {
   /// blueLighten2
   static const Color blueLighten2 = Color(0xFFEAF6F8);
 
-  /// greyRGBA
-  static const Color greyRGBA = Color(0xFF969696);
 
-  /// primaryRGBA
-  static const Color primaryRGBA = Color(0xFF8D0C0C);
-
-  /// mentari background color
-  static const Color mentariBackground = Color(0xFFDEC066);
 
   static Color greenLighten1RGBA = const Color.fromRGBO(69, 174, 9, 1);
 
-  /// Smartwatch color
-  static const Color watchLoginButtonColor = Color(0xFF202124);
 }

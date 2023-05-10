@@ -1,4 +1,4 @@
-package com.example.hrd
+package com.dartdroid.hrd
 
 import io.flutter.embedding.android.FlutterActivity
 

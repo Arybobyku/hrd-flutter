@@ -84,6 +84,9 @@ class _DartdroidAppState extends State<DartdroidApp>
       debugShowCheckedModeBanner: false,
       navigatorKey: _navKey,
       initialRoute: RouteName.splashScreen,
+      theme: ThemeData(
+        scaffoldBackgroundColor: DartdroidColor.whiteDarken200,
+      ),
       onGenerateRoute: _appRouter.onGenerateRoute,
       builder: (BuildContext materialContext, Widget? child) {
         return Scaffold(
@@ -92,7 +95,7 @@ class _DartdroidAppState extends State<DartdroidApp>
               if (state == ConnectionStatus.offline) {
                 return Container(
                   height: 40,
-                  color: DartdroidColor.red,
+                  color: DartdroidColor.blue,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   child: Center(
                     child: Text(
@@ -119,7 +122,7 @@ class _DartdroidAppState extends State<DartdroidApp>
 
                   if (state is AuthenticatedState) {
                     _navKey.currentState!.pushNamedAndRemoveUntil(
-                      RouteName.landingScreen,
+                      RouteName.dashboardScreen,
                       (route) => false,
                     );
                   }

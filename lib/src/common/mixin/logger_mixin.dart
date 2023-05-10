@@ -14,6 +14,9 @@ mixin LogMixin {
   void logW(String message) {
     logger.w(message);
   }
+  void logE(String message) {
+    logger.e(message);
+  }
 
   void logD(String message) {
     logger.d(message);

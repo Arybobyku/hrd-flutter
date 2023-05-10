@@ -40,9 +40,12 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
   }
 
   @override
-  Future<void> saveUserToLocalStorage(User user) {
-    // TODO: implement saveUserToLocalStorage
-    throw UnimplementedError();
+  Future<void> saveUserToLocalStorage(User user) async {
+    return await localStorageClient.saveByKey(
+      jsonEncode(user.toJson()),
+      SharedPrefKey.user,
+      SharedPrefType.STRING,
+    );
   }
 
   @override
@@ -52,17 +55,24 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
   }
 
   @override
-  Future<User?> signIn(
-      {required String userName, required String password}) async {
-    Response response = await apiClient.post(
-      Url.baseUrl + Url.login,
-      data: {
-        'username': userName,
-        'password': password,
-      },
-    );
+  Future<User?> signIn({
+    required String userName,
+    required String password,
+  }) async {
+    Response response =
+        await apiClient.post(Url.baseUrl + Url.login, queryParams: {
+      'email': userName,
+      'password': password,
+    }, headers: {
+      "Accept": "application/json",
+    });
 
-    return User.fromJson(response.data['data']);
+    User? user = BaseResponse<User>.fromJson(
+      response.data,
+      (json) => User.fromJson((json as Map<String, dynamic>)['user']),
+    ).data;
+
+    return user;
   }
 
   @override
