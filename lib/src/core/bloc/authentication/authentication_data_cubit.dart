@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:clock/clock.dart';
 import 'package:hrd/src/base/base.dart';
+import 'package:hrd/src/common/common.dart';
 
 import '../../core.dart';
 
@@ -13,7 +16,13 @@ class AuthenticationDataCubit extends Cubit<BaseState> {
   }) : super(InitializedState());
 
   void initialize() async {
-    final user = await authenticationRepository.getUSerFromLocalStorage();
+    String? rawUser;
+    User? user;
+
+    rawUser = await authenticationRepository.getUSerFromLocalStorage();
+    if (rawUser != null) {
+      user = User.fromJson(jsonDecode(rawUser));
+    }
 
     if (user == null) {
       return emit(UnauthenticatedState());

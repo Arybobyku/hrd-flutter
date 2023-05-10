@@ -69,8 +69,13 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
 
     User? user = BaseResponse<User>.fromJson(
       response.data,
-      (json) => User.fromJson((json as Map<String, dynamic>)['user']),
+      (json) => User.fromJsonAPI((json as Map<String, dynamic>)['user']),
     ).data;
+
+    user = user.copyWith(
+      accessToken: response.data['data']['access-token'],
+      tokenType: response.data['data']['token-type'],
+    );
 
     return user;
   }

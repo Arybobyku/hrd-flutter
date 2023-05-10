@@ -1,36 +1,112 @@
-import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:hrd/src/common/common.dart';
 
-part 'user.g.dart';
+class User extends BaseModel {
+  final int? id;
+  final int? role;
+  final String? firstName;
+  final String? lastname;
+  final String? email;
+  final String? mobilePhone;
+  final String? martialStatus;
+  final String? bloodType;
+  final String? religion;
+  final String? accessToken;
+  final String? tokenType;
 
-@JsonSerializable()
-class User extends Equatable {
-  @JsonKey(name: "id") final int? id;
-  @JsonKey(name: "name") final String? name;
-  @JsonKey(name: "email") final String? email;
-  @JsonKey(name: "nip") final String? nip;
-  @JsonKey(name: "role") final int? role;
-  @JsonKey(name: "token") final int? token;
-
-  const User({
+  User({
     this.id,
-    this.name,
-    this.email,
-    this.nip,
     this.role,
-    this.token,
+    this.email,
+    this.accessToken,
+    this.bloodType,
+    this.firstName,
+    this.lastname,
+    this.martialStatus,
+    this.mobilePhone,
+    this.religion,
+    this.tokenType,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory User.fromJsonAPI(Map<String, dynamic> json) => User(
+        id: json['id'],
+        role: json['role'],
+        email: json['email'],
+        firstName: json['first_name'],
+        lastname: json['last_name'],
+        mobilePhone: json['mobile_phone'],
+        martialStatus: json['martial_status'],
+        religion: json['religion'],
+        bloodType: json['blood_type'],
+      );
 
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json['id'],
+        role: json['role'],
+        email: json['email'],
+        firstName: json['first_name'],
+        lastname: json['last_name'],
+        mobilePhone: json['mobile_phone'],
+        martialStatus: json['martial_status'],
+        religion: json['religion'],
+        bloodType: json['blood_type'],
+        accessToken: json['access-token'],
+        tokenType: json['token-type'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "role": role,
+        "email": email,
+        "access-token": accessToken,
+        "blood_type": bloodType,
+        "first_name": firstName,
+        "last_name": lastname,
+        "martial_status": martialStatus,
+        "mobile_phone": mobilePhone,
+        "religion": religion,
+        "token-type": tokenType,
+      };
+
+  @override
+  copyWith({
+    int? id,
+    int? role,
+    String? firstName,
+    String? lastname,
+    String? email,
+    String? mobilePhone,
+    String? martialStatus,
+    String? bloodType,
+    String? religion,
+    String? accessToken,
+    String? tokenType,
+  }) =>
+      User(
+        id: id ?? this.id,
+        role: role ?? this.role,
+        firstName: firstName ?? this.firstName,
+        lastname: lastname ?? this.lastname,
+        email: email ?? this.email,
+        mobilePhone: mobilePhone ?? this.mobilePhone,
+        martialStatus: martialStatus ?? this.martialStatus,
+        bloodType: bloodType ?? this.bloodType,
+        religion: religion ?? this.religion,
+        accessToken: accessToken ?? this.accessToken,
+        tokenType: tokenType ?? this.tokenType,
+      );
 
   @override
   List<Object?> get props => [
         id,
-        name,
-        email,
-        nip,
         role,
+        email,
+        accessToken,
+        bloodType,
+        firstName,
+        lastname,
+        martialStatus,
+        mobilePhone,
+        religion,
+        tokenType,
       ];
 }
