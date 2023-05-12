@@ -7,7 +7,7 @@ class DartdroidColor {
   static const Color white = Color(0xFFFFFFFF);
 
   static const Color whiteDarken100 = Color(0xFFF3F3F3);
-  static const Color whiteDarken200 = Color(0xFFF3F3F5);
+  static const Color background = Color(0xFFF3F3F5);
 
   // ---
 

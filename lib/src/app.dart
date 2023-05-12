@@ -85,7 +85,21 @@ class _DartdroidAppState extends State<DartdroidApp>
       navigatorKey: _navKey,
       initialRoute: RouteName.splashScreen,
       theme: ThemeData(
-        scaffoldBackgroundColor: DartdroidColor.whiteDarken200,
+        scaffoldBackgroundColor: DartdroidColor.background,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: DartdroidColor.background,
+          selectedItemColor: DartdroidColor.primary,
+          unselectedItemColor: DartdroidColor.greyLighten30,
+          selectedLabelStyle: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+          unselectedLabelStyle: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+          enableFeedback: false,
+        ),
       ),
       onGenerateRoute: _appRouter.onGenerateRoute,
       builder: (BuildContext materialContext, Widget? child) {
@@ -122,7 +136,7 @@ class _DartdroidAppState extends State<DartdroidApp>
 
                   if (state is AuthenticatedState) {
                     _navKey.currentState!.pushNamedAndRemoveUntil(
-                      RouteName.dashboardScreen,
+                      RouteName.landingScreen,
                       (route) => false,
                     );
                   }

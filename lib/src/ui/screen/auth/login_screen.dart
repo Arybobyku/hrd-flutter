@@ -138,7 +138,7 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin {
         vertical: 20,
       ),
       decoration: const BoxDecoration(
-        color: DartdroidColor.whiteDarken200,
+        color: DartdroidColor.background,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(30),
         ),

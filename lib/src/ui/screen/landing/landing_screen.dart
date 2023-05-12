@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hrd/src/base/base.dart';
+import 'package:hrd/src/common/common.dart';
+import 'package:hrd/src/core/bloc/landing/tab/landing_tab_cubit.dart';
+import 'package:hrd/src/ui/screen/home/home_screen.dart';
+import 'package:hrd/src/ui/screen/notification/notification_screen.dart';
+import 'package:hrd/src/ui/screen/profile/profile_screen.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -10,16 +16,71 @@ class LandingScreen extends StatefulWidget {
 class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
-    return const LandingView();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => LandingTabCubit()..changeTab(0),
+        ),
+      ],
+      child: const LandingView(),
+    );
   }
 }
 
-class LandingView extends StatelessWidget {
+class LandingView extends StatefulWidget {
   const LandingView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
+  State<LandingView> createState() => _LandingViewState();
 }
 
+class _LandingViewState extends State<LandingView> with LandingTabBarMixin {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: BlocBuilder<LandingTabCubit, String>(
+          builder: (context, state) {
+            if (state == LandingTab.home) {
+              return const HomeScreen();
+            }
+
+            if (state == LandingTab.notification) {
+              return const NotificationScreen();
+            }
+
+            if (state == LandingTab.profile) {
+              return const ProfileScreen();
+            }
+
+            return const HomeScreen();
+          },
+        ),
+      ),
+      bottomNavigationBar: BlocBuilder<LandingTabCubit, String>(
+        builder: (context, state) {
+          return BottomNavigationBar(
+            currentIndex: currentIndexFromString(state),
+            onTap: (value) {
+              context.read<LandingTabCubit>().changeTab(value);
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: "Homes",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.notifications),
+                label: "Notification",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: "Profile",
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
