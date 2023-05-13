@@ -6,6 +6,7 @@ import 'package:hrd/src/ui/ui.dart';
 
 part 'part/home_screen_header.dart';
 part 'part/home_activity.dart';
+part 'part/home_menu.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,6 +34,7 @@ class HomeView extends StatelessWidget with WidgetMixin{
         children: [
           //Header
           HomeScreenHeader(user: user),
+          HomeMenu(),
           HomeActivity(),
         ],
       ),

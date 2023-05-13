@@ -62,7 +62,7 @@ class HomeScreenHeader extends StatelessWidget with WidgetMixin {
               )
             ],
           ),
-          verticalSpace20,
+          verticalSpace10,
         ],
       ),
     );
