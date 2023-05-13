@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hrd/src/app_router.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
-import 'package:hrd/src/common/utility/dartdroid_fonts.dart';
 
 import 'core/core.dart';
 

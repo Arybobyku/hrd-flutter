@@ -2,6 +2,8 @@
 ///
 /// These values are coming from `--dart-define` command arguments
 class EnvConfig {
+  //TODO: remove ip
+  String ip = "192.168.1.2";
   static const env = String.fromEnvironment(
     'ENV',
     defaultValue: 'DEV',
@@ -12,7 +14,7 @@ class EnvConfig {
   );
   static const baseUrl = String.fromEnvironment(
     'BASE_URL',
-    defaultValue: 'http://192.168.1.2/hrd-web/public/api'
+    defaultValue: 'http://172.20.10.2/hrd-web/public/api'
   );
 
   static get uriBaseUrl => Uri.parse(baseUrl);
