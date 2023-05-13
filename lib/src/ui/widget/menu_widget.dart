@@ -24,11 +24,11 @@ class MenuWidget extends StatelessWidget with WidgetMixin{
           child: Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: DartdroidColor.grey.withOpacity(0.2),
+              color: DartdroidColor.grey.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
             child: Image.asset(
-              Asset.iconLeave,
+              icon,
               height: 30,
               width: 30,
             ),
