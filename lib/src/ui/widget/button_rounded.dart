@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hrd/src/common/utility/dartdroid_fonts.dart';
 import 'package:hrd/src/common/common.dart';
 
 class ButtonRounded extends StatelessWidget {
@@ -32,7 +33,7 @@ class ButtonRounded extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Text(
             text,
-            style: TextStyle(
+            style: DartDroidFonts.customFontWeight(
               color: disabled
                   ? DartdroidColor.greyLighten10
                   : DartdroidColor.white,

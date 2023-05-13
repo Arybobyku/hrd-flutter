@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hrd/src/common/utility/dartdroid_fonts.dart';
 
 import '../../common/common.dart';
 
@@ -40,7 +41,7 @@ class TextFormFieldRounded extends StatelessWidget {
         errorText: errortext,
         filled: false,
         hoverColor: DartdroidColor.primary,
-        hintStyle: const TextStyle(
+        hintStyle:  DartDroidFonts.normal(
           color: DartdroidColor.primary,
         ),
         labelText: label,

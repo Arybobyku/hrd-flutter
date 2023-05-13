@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hrd/src/base/base.dart';
+import 'package:hrd/src/common/utility/dartdroid_fonts.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/core/bloc/authentication/authentication.dart';
 import 'package:hrd/src/ui/ui.dart';
@@ -104,19 +105,20 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
-              SizedBox(height: 20),
+            children: [
+              const SizedBox(height: 20),
               Text(
                 "Sign in to your \nAccount",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
+                style: DartDroidFonts.bold(
+                  color: DartdroidColor.white,
+                  fontSize: 30,
+                ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 "Sign in to your Account",
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: DartDroidFonts.normal(
+                    color: DartdroidColor.white, fontSize: 16),
               ),
             ],
           ),
@@ -169,9 +171,9 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin {
             secureText: true,
           ),
           const SizedBox(height: 20),
-          const Text(
+          Text(
             "Forgot Password?",
-            style: TextStyle(color: DartdroidColor.primary),
+            style: DartDroidFonts.normal(color: DartdroidColor.primary),
           ),
           const SizedBox(height: 10),
           ButtonRounded(

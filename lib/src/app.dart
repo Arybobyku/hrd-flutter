@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hrd/src/app_router.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
-import 'package:hrd/src/common/utility/dartdroid_font.dart';
+import 'package:hrd/src/common/utility/dartdroid_fonts.dart';
 
 import 'core/core.dart';
 
@@ -114,7 +114,7 @@ class _DartdroidAppState extends State<DartdroidApp>
                   child: Center(
                     child: Text(
                       'Tidak Ada Koneksi Internet',
-                      style: DartdroidFont.regular14(color: Colors.white),
+                      style: DartDroidFonts.normal(color: Colors.white),
                     ),
                   ),
                 );

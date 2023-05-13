@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hrd/src/base/base.dart';
+import 'package:hrd/src/common/utility/dartdroid_fonts.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/core/bloc/authentication/authentication.dart';
 import 'package:hrd/src/ui/ui.dart';
@@ -32,10 +33,10 @@ class HomeView extends StatelessWidget {
         children: [
           //Header
           HomeScreenHeader(user: user),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             "Aktifitas Hari ini",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: DartDroidFonts.bold(fontSize: 18),
           ),
         ],
       ),
