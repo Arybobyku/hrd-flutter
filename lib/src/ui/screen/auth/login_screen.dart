@@ -15,12 +15,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return const LoginView();
+    return LoginView();
   }
 }
 
-class LoginView extends StatelessWidget with SnackBarMessageMixin {
-  const LoginView({Key? key}) : super(key: key);
+class LoginView extends StatelessWidget with SnackBarMessageMixin, WidgetMixin {
+  LoginView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
+              verticalSpace20,
               Text(
                 "Sign in to your \nAccount",
                 style: DartDroidFonts.bold(
@@ -114,7 +114,7 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin {
                   fontSize: 30,
                 ),
               ),
-              const SizedBox(height: 10),
+              verticalSpace10,
               Text(
                 "Sign in to your Account",
                 style: DartDroidFonts.normal(
@@ -122,7 +122,7 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin {
               ),
             ],
           ),
-          const SizedBox(height: 50),
+          verticalSpace(50),
         ],
       ),
     );
@@ -147,7 +147,7 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin {
       ),
       child: Column(
         children: [
-          const SizedBox(height: 20),
+          verticalSpace20,
           TextFormFieldRounded(
             label: "Username",
             //TODO: REMOVE
@@ -156,7 +156,7 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin {
               username = value;
             },
           ),
-          const SizedBox(height: 30),
+          verticalSpace(30),
           TextFormFieldRounded(
             label: "Password",
             //TODO: REMOVE
@@ -170,12 +170,12 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin {
             ),
             secureText: true,
           ),
-          const SizedBox(height: 20),
+          verticalSpace20,
           Text(
             "Forgot Password?",
             style: DartDroidFonts.normal(color: DartdroidColor.primary),
           ),
-          const SizedBox(height: 10),
+          verticalSpace10,
           ButtonRounded(
             text: "Sign in",
             onPressed: () {

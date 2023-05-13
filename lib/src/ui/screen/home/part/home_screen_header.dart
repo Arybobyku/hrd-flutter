@@ -1,9 +1,9 @@
 part of '../home_screen.dart';
 
-class HomeScreenHeader extends StatelessWidget {
+class HomeScreenHeader extends StatelessWidget with WidgetMixin {
   final User user;
 
-  const HomeScreenHeader({Key? key, required this.user}) : super(key: key);
+  HomeScreenHeader({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class HomeScreenHeader extends StatelessWidget {
               color: DartdroidColor.white,
             ),
           ),
-          const SizedBox(height: 15),
+          verticalSpace15,
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -38,7 +38,7 @@ class HomeScreenHeader extends StatelessWidget {
                         color: DartdroidColor.white,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    verticalSpace(4),
                     Text(
                       "Software Developer",
                       style: DartDroidFonts.normal(
@@ -62,9 +62,9 @@ class HomeScreenHeader extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 20),
+          verticalSpace20,
           Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             decoration: const BoxDecoration(
               color: DartdroidColor.white,
               borderRadius: BorderRadius.all(
@@ -96,14 +96,14 @@ class HomeScreenHeader extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                verticalSpace(12),
                 Text(
                   "09:00 AM - 06:00 PM",
                   style: DartDroidFonts.bold(
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(height: 2),
+                verticalSpace(2),
                 Text(
                   "Jam Kerja",
                   maxLines: 1,
@@ -113,19 +113,14 @@ class HomeScreenHeader extends StatelessWidget {
                     fontSize: 14,
                   ),
                 ),
-                const SizedBox(height: 12),
-                Divider(
-                  height: 1,
-                  color: DartdroidColor.greyLighten30,
-                ),
-                const SizedBox(height: 12),
+                divider(),
                 Row(
                   children: [
                     const Icon(
                       Icons.location_pin,
                       color: DartdroidColor.redDarken40,
                     ),
-                    SizedBox(width: 5),
+                    horizontalSpace(5),
                     Expanded(
                       child: Text(
                         "Universitas Sumatera Utara jalan menteng indah VI-6 Universitas Sumatera Utara jalan menteng indah VI-6",
@@ -136,12 +131,7 @@ class HomeScreenHeader extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
-                Divider(
-                  height: 1,
-                  color: DartdroidColor.greyLighten30,
-                ),
-                const SizedBox(height: 12),
+                divider(),
                 Row(
                   children: [
                     Expanded(
@@ -152,9 +142,7 @@ class HomeScreenHeader extends StatelessWidget {
                         onPressed: () {},
                       ),
                     ),
-                    SizedBox(
-                      width: 20,
-                    ),
+                    horizontalSpace20,
                     Expanded(
                       child: ButtonRounded(
                         text: "Keluar",

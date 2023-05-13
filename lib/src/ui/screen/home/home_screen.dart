@@ -17,12 +17,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const HomeView();
+    return HomeView();
   }
 }
 
-class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+class HomeView extends StatelessWidget with WidgetMixin{
+  HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class HomeView extends StatelessWidget {
         children: [
           //Header
           HomeScreenHeader(user: user),
-          const SizedBox(height: 20),
+          verticalSpace20,
           Text(
             "Aktifitas Hari ini",
             style: DartDroidFonts.bold(fontSize: 18),
