@@ -6,6 +6,7 @@ class ButtonRounded extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
   final bool disabled;
+  final bool invert;
   final FontWeight fontWeight;
   final double borderRadius;
 
@@ -13,33 +14,37 @@ class ButtonRounded extends StatelessWidget {
     Key? key,
     this.onPressed,
     required this.text,
-    this.borderRadius = 15,
+    this.borderRadius = 10,
+    this.invert = false,
     this.disabled = false,
-    this.fontWeight = FontWeight.bold,
+    this.fontWeight = FontWeight.normal,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(vertical: 15.0),
       decoration: BoxDecoration(
-        color: disabled ? DartdroidColor.greyLighten70 : DartdroidColor.primary,
+        color: disabled
+            ? DartdroidColor.greyLighten70
+            : invert
+                ? DartdroidColor.white
+                : DartdroidColor.primary,
         borderRadius: BorderRadius.circular(borderRadius),
+        border: invert ? Border.all(color: DartdroidColor.primary) : null,
       ),
       child: TextButton(
         onPressed: onPressed,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Text(
-            text,
-            style: DartDroidFonts.customFontWeight(
-              color: disabled
-                  ? DartdroidColor.greyLighten10
-                  : DartdroidColor.white,
-              fontSize: 18,
-              fontWeight:fontWeight,
-            ),
+        child: Text(
+          text,
+          style: DartDroidFonts.customFontWeight(
+            color: disabled
+                ? DartdroidColor.greyLighten10
+                : invert
+                    ? DartdroidColor.primary
+                    : DartdroidColor.white,
+            fontSize: 18,
+            fontWeight: fontWeight,
           ),
         ),
       ),

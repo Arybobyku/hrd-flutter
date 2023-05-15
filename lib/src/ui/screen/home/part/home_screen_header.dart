@@ -38,7 +38,7 @@ class HomeScreenHeader extends StatelessWidget with WidgetMixin {
                         color: DartdroidColor.white,
                       ),
                     ),
-                    verticalSpace(4),
+                    verticalSpace(2),
                     Text(
                       "Software Developer",
                       style: DartDroidFonts.normal(
@@ -49,6 +49,7 @@ class HomeScreenHeader extends StatelessWidget with WidgetMixin {
                   ],
                 ),
               ),
+              horizontalSpace5,
               Container(
                 padding: const EdgeInsets.all(15),
                 decoration: const BoxDecoration(

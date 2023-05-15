@@ -28,6 +28,8 @@ class AuthenticationDataCubit extends Cubit<BaseState> {
       return emit(UnauthenticatedState());
     }
 
+    print("CALLED");
+
     emit(AuthenticatedState(data: user));
   }
 }

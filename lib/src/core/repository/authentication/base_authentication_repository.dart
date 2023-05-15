@@ -18,6 +18,8 @@ abstract class BaseAuthenticationRepository {
     required User user,
   });
 
+  Future signOut(String token);
+
   /// Reset password
   Future<User?> resetPassword({
     required String userName,

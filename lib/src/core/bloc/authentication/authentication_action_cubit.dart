@@ -78,6 +78,31 @@ class AuthenticationActionCubit extends Cubit<BaseState<AuthMeta>> {
     emit(SuccessState(data: AuthMeta(type: AuthMetaType.signIn)));
   }
 
-  //TODO: SIGN OUT
-  void signOut() {}
+  void signOut(String token) async {
+    emit(
+      LoadingState(
+        data: AuthMeta(type: AuthMetaType.signOut),
+      ),
+    );
+
+    try {
+      await authenticationRepository.signOut(token);
+
+      await authenticationRepository.resetLocalStorage();
+
+    } catch (e) {
+      emit(
+        ErrorState(
+          data: AuthMeta(type: AuthMetaType.signOut),
+          error: e.toString(),
+        ),
+      );
+    }
+
+    emit(
+      SuccessState(
+        data: AuthMeta(type: AuthMetaType.signOut),
+      ),
+    );
+  }
 }

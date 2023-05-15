@@ -45,7 +45,7 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin, WidgetMixin {
           child: BlocBuilder<AuthenticationActionCubit, BaseState<AuthMeta>>(
             builder: (context, state) {
               return FullLoading(
-                widget: SingleChildScrollView(
+                child: SingleChildScrollView(
                   child: Stack(
                     children: [
                       header(context),

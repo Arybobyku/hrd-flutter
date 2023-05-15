@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
+import 'package:hrd/src/core/bloc/authentication/authentication.dart';
 import 'package:hrd/src/core/bloc/landing/tab/landing_tab_cubit.dart';
 import 'package:hrd/src/ui/screen/home/home_screen.dart';
 import 'package:hrd/src/ui/screen/notification/notification_screen.dart';
 import 'package:hrd/src/ui/screen/profile/profile_screen.dart';
+
+import '../../ui.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -34,27 +37,54 @@ class LandingView extends StatefulWidget {
   State<LandingView> createState() => _LandingViewState();
 }
 
-class _LandingViewState extends State<LandingView> with LandingTabBarMixin {
+class _LandingViewState extends State<LandingView>
+    with LandingTabBarMixin, SnackBarMessageMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<LandingTabCubit, String>(
-          builder: (context, state) {
-            if (state == LandingTab.home) {
-              return const HomeScreen();
-            }
+        child: MultiBlocListener(
+          listeners: [
+            BlocListener<AuthenticationActionCubit, BaseState<AuthMeta>>(
+              listener: (context, state) {
+                if (state is SuccessState &&
+                    state.data?.type == AuthMetaType.signOut) {
+                  context.read<AuthenticationDataCubit>().initialize();
+                }
 
-            if (state == LandingTab.notification) {
-              return const NotificationScreen();
-            }
+                if (state is ErrorState &&
+                    state.data?.type == AuthMetaType.signOut) {
+                  showSnackBarMessage(context, (state as ErrorState).error);
+                }
+              },
+            ),
+          ],
+          child: BlocBuilder<AuthenticationActionCubit, BaseState<AuthMeta>>(
+            builder: (context, state) {
+              var isLoading = (state is LoadingState &&
+                  state.data!.type == AuthMetaType.signOut);
+              return FullLoading(
+                isLoading: isLoading,
+                child: BlocBuilder<LandingTabCubit, String>(
+                  builder: (context, state) {
+                    if (state == LandingTab.home) {
+                      return const HomeScreen();
+                    }
 
-            if (state == LandingTab.profile) {
-              return const ProfileScreen();
-            }
+                    if (state == LandingTab.notification) {
+                      return const NotificationScreen();
+                    }
 
-            return const HomeScreen();
-          },
+                    if (state == LandingTab.profile) {
+                      return const ProfileScreen();
+                    }
+
+                    return const HomeScreen();
+                  },
+                ),
+              );
+            },
+          ),
         ),
       ),
       bottomNavigationBar: BlocBuilder<LandingTabCubit, String>(

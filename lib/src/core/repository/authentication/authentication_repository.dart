@@ -28,10 +28,7 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
   }
 
   @override
-  Future<void> resetLocalStorage() {
-    // TODO: implement resetLocalStorage
-    throw UnimplementedError();
-  }
+  Future<void> resetLocalStorage() => localStorageClient.clearAll();
 
   @override
   Future<User?> resetPassword({required String userName}) {
@@ -100,5 +97,16 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
       required String token}) {
     // TODO: implement unsubscribePushNotification
     throw UnimplementedError();
+  }
+
+  @override
+  Future signOut(String token) async {
+    await apiClient.post(
+      Url.baseUrl + Url.logout,
+      token: token,
+      headers: {
+        "Accept": "application/json",
+      },
+    );
   }
 }
