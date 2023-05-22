@@ -85,6 +85,13 @@ class _DartdroidAppState extends State<DartdroidApp>
       initialRoute: RouteName.splashScreen,
       theme: ThemeData(
         scaffoldBackgroundColor: DartdroidColor.background,
+        appBarTheme:  AppBarTheme(
+          titleTextStyle: DartDroidFonts.bold(fontSize: 22,color: DartdroidColor.white),
+          backgroundColor: DartdroidColor.primary,
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: DartdroidColor.primary,
+        ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: DartdroidColor.background,
           selectedItemColor: DartdroidColor.primary,

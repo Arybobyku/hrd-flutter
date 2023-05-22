@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-mixin SnackBarMessageMixin{
-  showSnackBarMessage(BuildContext context, String message){
+mixin SnackBarMessageMixin {
+  showSnackBarMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(

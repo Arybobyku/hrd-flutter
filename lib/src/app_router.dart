@@ -65,6 +65,32 @@ class AppRouter {
                 )
               : const LandingScreen(),
         );
+        case RouteName.leaveScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.leaveScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const LeaveScreen(),
+                )
+              : const LeaveScreen(),
+        );
+        case RouteName.createLeaveScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.createLeaveScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const CreateLeaveScreen(),
+                )
+              : const CreateLeaveScreen(),
+        );
 
       default:
         return MaterialPageRoute(
@@ -84,5 +110,7 @@ class RouteName {
   static const String loginScreen = "loginScreen";
   static const String registerScreen = "registerScreen";
   static const String landingScreen = "landingScreen";
+  static const String leaveScreen = "leaveScreen";
+  static const String createLeaveScreen = "createLeaveScreen";
   static const String notFoundScreen = "notFoundScreen";
 }

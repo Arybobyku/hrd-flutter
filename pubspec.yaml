@@ -31,6 +31,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+#If you want to using base project
+#  dartdroid_base_project:
+#    git:
+#      url: git@github.com:Arybobyku/dartdroid_base_project.git
+#      ref: 0.0.2
+
   cupertino_icons: ^1.0.2
   # Networking
   dio: ^4.0.4

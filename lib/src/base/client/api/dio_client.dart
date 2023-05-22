@@ -44,7 +44,7 @@ class DioClient extends BaseApiClient with LogMixin {
         SharedPrefKey.token, SharedPrefType.STRING);
 
     if (token != null && dioError.response?.statusCode == 401) {
-      logD("REFRESH TOKEN");
+      logD("TODO: REFRESH TOKEN");
     }
 
     errorInterceptorHandler.next(dioError);

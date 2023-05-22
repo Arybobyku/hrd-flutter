@@ -4,9 +4,21 @@ class HomeMenu extends StatelessWidget with WidgetMixin {
   HomeMenu({Key? key}) : super(key: key);
 
   List<Menu> menus = [
-    Menu(label: "Cuti", icon: Asset.iconLeave),
-    Menu(label: "Absen", icon: Asset.iconAttendance),
-    Menu(label: "Laporan", icon: Asset.iconReport),
+    Menu(
+      label: "Cuti",
+      icon: Asset.iconLeave,
+      navigate: RouteName.leaveScreen,
+    ),
+    Menu(
+      label: "Absen",
+      icon: Asset.iconAttendance,
+      navigate: RouteName.leaveScreen,
+    ),
+    Menu(
+      label: "Laporan",
+      icon: Asset.iconReport,
+      navigate: RouteName.leaveScreen,
+    ),
   ];
 
   @override
@@ -34,6 +46,9 @@ class HomeMenu extends StatelessWidget with WidgetMixin {
                     (e) => MenuWidget(
                       label: e.label,
                       icon: e.icon,
+                      onTap: () {
+                        Navigator.pushNamed(context, e.navigate);
+                      },
                     ),
                   )
                   .toList(),

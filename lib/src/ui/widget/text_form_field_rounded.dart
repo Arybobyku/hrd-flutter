@@ -10,9 +10,10 @@ class TextFormFieldRounded extends StatelessWidget {
   final Widget? suffixIcon;
   final bool secureText;
   final TextInputType keyboardType;
-  final String? errortext;
+  final String? errorText;
   final FormFieldValidator? validatorCheck;
   final TextEditingController? controller;
+  final bool readOnly;
 
   const TextFormFieldRounded({
     Key? key,
@@ -22,8 +23,9 @@ class TextFormFieldRounded extends StatelessWidget {
     this.initialValue,
     this.suffixIcon,
     this.keyboardType = TextInputType.text,
-    this.errortext,
+    this.errorText,
     this.secureText = false,
+    this.readOnly = false,
     this.controller
   }) : super(key: key);
 
@@ -37,8 +39,9 @@ class TextFormFieldRounded extends StatelessWidget {
       obscureText: secureText,
       cursorColor: DartdroidColor.primary,
       keyboardType: keyboardType,
+      readOnly: readOnly,
       decoration: InputDecoration(
-        errorText: errortext,
+        errorText: errorText,
         filled: false,
         hoverColor: DartdroidColor.primary,
         hintStyle:  DartDroidFonts.normal(
