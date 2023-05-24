@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:intl/intl.dart';
 
-class FormDateTimeWidget extends StatelessWidget {
-  const FormDateTimeWidget({
+class FormDateTimeWidget extends StatelessWidget with WidgetMixin {
+  FormDateTimeWidget({
     Key? key,
-    required this.title,
+    this.title,
     this.titleStyle,
     this.subtitle,
     this.subtitleStyle,
-    this.isRequirement,
     this.hintText,
     this.hintTextStyle,
     this.validator,
@@ -17,13 +16,13 @@ class FormDateTimeWidget extends StatelessWidget {
     this.onTap,
     this.icon,
     this.isOnlyDate = false,
+    this.isRequired = false,
   }) : super(key: key);
 
-  final String title;
+  final String? title;
   final TextStyle? titleStyle;
   final String? subtitle;
   final TextStyle? subtitleStyle;
-  final bool? isRequirement;
   final String? hintText;
   final TextStyle? hintTextStyle;
   final String? Function(String?)? validator;
@@ -31,101 +30,98 @@ class FormDateTimeWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final IconData? icon;
   final bool isOnlyDate;
+  final bool isRequired;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          RichText(
-            text: TextSpan(
-              text: title,
-              style: titleStyle ?? DartDroidFonts.bold(fontSize: 16),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (title != null)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: RichText(
+                  text: TextSpan(
+                    text: title,
+                    style: DartDroidFonts.normal(
+                      fontSize: 16,
+                      color: DartdroidColor.greyLighten8,
+                    ),
+                    children: [
+                      if (isRequired) ...[
+                        TextSpan(
+                          text: ' *',
+                          style: DartDroidFonts.normal(
+                            color: DartdroidColor.redDarken40,
+                          ),
+                        )
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+              verticalSpace5,
+            ],
+          ),
+        InkWell(
+          onTap: () => onTap != null ? onTap!.call() : null,
+          borderRadius: BorderRadius.circular(10),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 14.0,
+              horizontal: 10,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              border: Border.all(
+                width: 1,
+                color: DartdroidColor.greyLighten30,
+              ),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (isRequirement != null && isRequirement!) ...[
-                  TextSpan(
-                    text: ' *',
-                    style: titleStyle?.copyWith(
-                          color: DartdroidColor.redDarken40,
-                        ) ??
-                        DartDroidFonts.bold(
-                          fontSize: 16,
-                          color: DartdroidColor.grey,
-                        ),
+                if (value != null) ...[
+                  if (isOnlyDate) ...[
+                    Text(
+                      DateFormat('yyyy-MM-dd').format(value!).toString(),
+                      style: DartDroidFonts.normal(
+                        fontSize: 14,
+                        color: DartdroidColor.black,
+                      ),
+                    ),
+                  ] else ...[
+                    Text(
+                      DateFormat('yyyy-MM-dd HH:mm').format(value!).toString(),
+                      style: DartDroidFonts.normal(
+                        fontSize: 14,
+                        color: DartdroidColor.black,
+                      ),
+                    ),
+                  ]
+                ] else ...[
+                  Text(
+                    hintText ?? "DD-MM-YYYY 00:00",
+                    style: DartDroidFonts.normal(
+                      fontSize: 14,
+                      color: DartdroidColor.grey,
+                    ),
                   )
                 ],
+                Icon(
+                  icon,
+                  color: DartdroidColor.grey,
+                  size: 18.0,
+                ),
               ],
             ),
           ),
-          if (subtitle != null) ...[
-            Text(
-              subtitle!,
-              style: subtitleStyle ??
-                  DartDroidFonts.bold(
-                    fontSize: 12,
-                    color: DartdroidColor.grey,
-                  ),
-            ),
-          ],
-          InkWell(
-            onTap: () => onTap != null ? onTap!.call() : null,
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 18.0,
-              ),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                width: 1.0,
-                color: DartdroidColor.greyLighten60,
-              )),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (value != null) ...[
-                    if (isOnlyDate) ...[
-                      Text(
-                        DateFormat('yyyy-MM-dd').format(value!).toString(),
-                        style: DartDroidFonts.normal(
-                          fontSize: 16,
-                          color: DartdroidColor.black,
-                        ),
-                      ),
-                    ] else ...[
-                      Text(
-                        DateFormat('yyyy-MM-dd HH:mm')
-                            .format(value!)
-                            .toString(),
-                        style: DartDroidFonts.normal(
-                          fontSize: 16,
-                          color: DartdroidColor.black,
-                        ),
-                      ),
-                    ]
-                  ] else ...[
-                    Text(
-                      hintText ?? "DD-MM-YYYY 00:00",
-                      style: DartDroidFonts.normal(
-                        fontSize: 16,
-                        color: DartdroidColor.greyLighten30,
-                      ),
-                    )
-                  ],
-                  Icon(
-                    icon,
-                    color: DartdroidColor.grey,
-                    size: 18.0,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

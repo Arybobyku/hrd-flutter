@@ -4,6 +4,7 @@ import 'package:hrd/src/common/common.dart';
 class DropDownWidget extends StatefulWidget {
   final Widget? titleOption;
   final String? title;
+  final bool isRequired;
   final TextStyle? titleStyle;
   final TextStyle? fieldStyle;
   final String? hint;
@@ -23,6 +24,7 @@ class DropDownWidget extends StatefulWidget {
     this.titleOption,
     this.title = '',
     this.titleStyle,
+    this.isRequired = false,
     this.fieldStyle,
     this.hint,
     this.hintStyle,
@@ -41,7 +43,7 @@ class DropDownWidget extends StatefulWidget {
   _DropDownWidgetState createState() => _DropDownWidgetState();
 }
 
-class _DropDownWidgetState extends State<DropDownWidget> {
+class _DropDownWidgetState extends State<DropDownWidget> with WidgetMixin {
   final GlobalKey<FormFieldState> _fieldKey = GlobalKey<FormFieldState>();
 
   List<DropdownMenuItem<Map>>? _dropdownMenuItems;
@@ -49,7 +51,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
   Map<dynamic, dynamic>? _selectedItem;
   bool _isErrorCustomMessage = false;
   bool _isErrorWithValidatorKey = false;
-  TextStyle defaultStyle = DartDroidFonts.normal(fontSize: 16)!;
+  TextStyle defaultStyle = DartDroidFonts.normal(fontSize: 14)!;
 
   @override
   void initState() {
@@ -104,19 +106,47 @@ class _DropDownWidgetState extends State<DropDownWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (widget.title != null)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: RichText(
+                  text: TextSpan(
+                    text: widget.title,
+                    style: widget.titleStyle ??
+                        DartDroidFonts.normal(
+                          fontSize: 16,
+                          color: DartdroidColor.greyLighten8,
+                        ),
+                    children: [
+                      if (widget.isRequired) ...[
+                        TextSpan(
+                          text: ' *',
+                          style: DartDroidFonts.normal(
+                            color: DartdroidColor.redDarken40,
+                          ),
+                        )
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+              verticalSpace5,
+            ],
+          ),
         Container(
           key: widget.key,
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-            border:Border.all(
-              color: DartdroidColor.greyLighten30,
-              width: 1,
-            )
-          ),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+              border: Border.all(
+                color: DartdroidColor.greyLighten30,
+                width: 1,
+              )),
           alignment: Alignment.centerLeft,
           child: DropdownButtonFormField(
             key: _fieldKey,
@@ -129,7 +159,8 @@ class _DropDownWidgetState extends State<DropDownWidget> {
               isDense: true,
               enabledBorder: InputBorder.none,
               border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(vertical: 5),
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               errorMaxLines: 1,
               errorStyle: TextStyle(color: Colors.transparent, fontSize: 0),
               errorBorder: OutlineInputBorder(
@@ -139,11 +170,11 @@ class _DropDownWidgetState extends State<DropDownWidget> {
             ),
             value: _selectedItem,
             hint: Text(
-              '${widget.title ?? _selectedItem}',
+              '${widget.hint ?? _selectedItem}',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: widget.hintStyle ??
-                  defaultStyle.copyWith(color: DartdroidColor.grey),
+                  defaultStyle.copyWith(color: DartdroidColor.black),
               textAlign: TextAlign.start,
             ),
             items: _dropdownMenuItems,
@@ -163,7 +194,8 @@ class _DropDownWidgetState extends State<DropDownWidget> {
               "${widget.customErrorWithoutValidator ?? _fieldKey.currentState?.errorText}",
               textAlign: widget.errorMessageAlign,
               style: widget.customErrorWithoutValidatorStyle ??
-                  DartDroidFonts.bold(fontSize: 10,color: DartdroidColor.primary),
+                  DartDroidFonts.bold(
+                      fontSize: 10, color: DartdroidColor.primary),
             ),
           ),
         ],
