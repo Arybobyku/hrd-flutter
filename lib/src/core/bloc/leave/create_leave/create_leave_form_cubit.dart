@@ -24,7 +24,19 @@ class CreateLeaveFormCubit extends Cubit<BaseState<LeaveFormData>> {
     emit(LoadedState(data: latestFormData));
   }
 
-  void submitFormLeave() {}
+  void submitFormLeave(LeaveFormData latestFormData) async {
+    // emit(
+    //   LoadingState(
+    //     data: latestFormData,
+    //   )
+    // );
+    //
+    // emit(
+    //   SuccessState(
+    //     data: LeaveFormData(),
+    //   )
+    // );
+  }
 }
 
 class LeaveFormData extends BaseModel {

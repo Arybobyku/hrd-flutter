@@ -10,20 +10,25 @@ class FullLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        child,
-        if(isLoading)
-        Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            color: DartdroidColor.grey.withOpacity(0.5),
-          ),
-          alignment: Alignment.center,
-          child: const CircularProgressIndicator(),
-        )
-      ],
+    return WillPopScope(
+      onWillPop: ()async{
+        return !isLoading;
+      },
+      child: Stack(
+        children: [
+          child,
+          if(isLoading)
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              color: DartdroidColor.grey.withOpacity(0.5),
+            ),
+            alignment: Alignment.center,
+            child: const CircularProgressIndicator(),
+          )
+        ],
+      ),
     );
   }
 }
