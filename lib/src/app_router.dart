@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hrd/src/base/bloc/bloc.dart';
+import 'package:hrd/src/ui/screen/leave/detail/detail_leave_screen.dart';
 import 'package:hrd/src/ui/screen/screen.dart';
 
 import 'common/common.dart';
@@ -92,6 +93,20 @@ class AppRouter {
               : const CreateLeaveScreen(),
         );
 
+        case RouteName.detailLeaveScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.detailLeaveScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const DetailLeaveScreen(),
+                )
+              : const DetailLeaveScreen(),
+        );
+
       default:
         return MaterialPageRoute(
           settings: const RouteSettings(
@@ -112,5 +127,6 @@ class RouteName {
   static const String landingScreen = "landingScreen";
   static const String leaveScreen = "leaveScreen";
   static const String createLeaveScreen = "createLeaveScreen";
+  static const String detailLeaveScreen = "detailLeaveScreen";
   static const String notFoundScreen = "notFoundScreen";
 }

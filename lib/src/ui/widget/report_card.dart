@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/common/mixin/status_mixin.dart';
+import 'package:hrd/src/ui/widget/status_card.dart';
 
 class ReportCard extends StatelessWidget with StatusMixin, WidgetMixin {
   final String title;
@@ -43,22 +44,7 @@ class ReportCard extends StatelessWidget with StatusMixin, WidgetMixin {
             ),
           ),
           horizontalSpace20,
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-            decoration: BoxDecoration(
-              color: statusBackgroundColor(status),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(10),
-              ),
-            ),
-            child: Text(
-              status,
-              style: DartDroidFonts.bold(
-                fontSize: 14,
-                color: statusTextColor(status),
-              ),
-            ),
-          ),
+          StatusCard(status: status),
         ],
       ),
     );
