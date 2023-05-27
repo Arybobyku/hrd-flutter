@@ -65,6 +65,8 @@ dependencies:
   flutter_beep: ^1.0.0
   connectivity_plus: ^2.3.0
   image_gallery_saver: ^1.7.1
+  intl:
+  flutter_svg: ^2.0.0
 
   # Client
 #  background_fetch: ^1.0.3

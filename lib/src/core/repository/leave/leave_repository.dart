@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
+import 'package:hrd/src/common/mixin/date_mixin.dart';
 import 'package:hrd/src/core/core.dart';
+import 'package:intl/intl.dart';
 
-class LeaveRepository implements BaseLeaveRepository {
+class LeaveRepository with DateMixin implements BaseLeaveRepository{
   final BaseApiClient apiClient;
 
   LeaveRepository({required this.apiClient});
@@ -12,8 +14,8 @@ class LeaveRepository implements BaseLeaveRepository {
   Future<List<Leave>> getAllTimeOff() async {
     Response response = await apiClient.get(Url.baseUrl + Url.timeOff);
 
-    final listMap =  BaseResponse<List>.fromJson(
-        response.data, (json) => json as List).data;
+    final listMap =
+        BaseResponse<List>.fromJson(response.data, (json) => json as List).data;
 
     List<Leave> timeOff = [];
 
@@ -29,14 +31,15 @@ class LeaveRepository implements BaseLeaveRepository {
   }
 
   @override
-  Future<void> submitLeave(Leave leave) async {
-    Response response = await apiClient.post(
-      Url.baseUrl + Url.login,
-      data: {
-        "start_date":leave.startDate,
-        "end_date":leave.endDate,
-        "reasons":leave.reasons,
-      }
-    );
+  Future<Meta> submitLeave(LeaveFormData leave) async {
+    Response response = await apiClient.post(Url.baseUrl + Url.timeOff, data: {
+      "start_date": parseDate(leave.startDate!),
+      "end_date": parseDate(leave.endDate!),
+      "reasons": leave.reasons,
+    });
+
+    final baseResponse = BaseResponse.fromJson(response.data, (json) => null);
+
+    return baseResponse.meta;
   }
 }

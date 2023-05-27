@@ -1,13 +1,18 @@
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
+import 'package:hrd/src/core/core.dart';
 
 class CreateLeaveFormCubit extends Cubit<BaseState<LeaveFormData>> {
-  CreateLeaveFormCubit() : super(InitializedState(data: LeaveFormData()));
+  final BaseLeaveRepository leaveRepository;
 
-  void updateFormLeaveTypes(LeaveFormData latestFormData, String value) {
-    latestFormData = latestFormData.copyWith(leaveTypes: value);
-    emit(LoadedState(data: latestFormData));
-  }
+  CreateLeaveFormCubit({required this.leaveRepository})
+      : super(InitializedState(data: LeaveFormData()));
+
+  //TODO: BOBY
+  // void updateFormLeaveTypes(LeaveFormData latestFormData, String value) {
+  //   latestFormData = latestFormData.copyWith(leaveTypes: value);
+  //   emit(LoadedState(data: latestFormData));
+  // }
 
   void updateFormStartDate(LeaveFormData latestFormData, DateTime value) {
     latestFormData = latestFormData.copyWith(startDate: value);
@@ -24,18 +29,29 @@ class CreateLeaveFormCubit extends Cubit<BaseState<LeaveFormData>> {
     emit(LoadedState(data: latestFormData));
   }
 
-  void submitFormLeave(LeaveFormData latestFormData) async {
-    // emit(
-    //   LoadingState(
-    //     data: latestFormData,
-    //   )
-    // );
-    //
-    // emit(
-    //   SuccessState(
-    //     data: LeaveFormData(),
-    //   )
-    // );
+  void submitFormLeave(LeaveFormData leave) async {
+    emit(LoadingState(
+      data: leave,
+    ));
+
+    try {
+      Meta meta = await leaveRepository.submitLeave(leave);
+
+      if (meta.code == 200) {
+        emit(
+          SuccessState(
+            data: leave,
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        ErrorState(
+          data: leave,
+          error: e.toString(),
+        ),
+      );
+    }
   }
 }
 

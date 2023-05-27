@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:hrd/src/ui/ui.dart';
 
 import '../common.dart';
 
@@ -32,4 +34,38 @@ mixin WidgetMixin {
           verticalSpace(marginVertical),
         ],
       );
+
+
+  showSuccessDialog(BuildContext context,{required String description, Function()? onTap}){
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              Asset.iconSuccess,
+              height: 100,
+              width: 100,
+            ),
+            verticalSpace15,
+            Text(
+              "Berhasil",
+              style: DartDroidFonts.bold(
+                  fontSize: 30,
+                  color:
+                  DartdroidColor.primary),
+            ),
+            Text(
+              description,
+              style: DartDroidFonts.normal(
+                  fontSize: 14),
+            ),
+            verticalSpace20,
+            ButtonRounded(text: "Kembali",onPressed: onTap,),
+          ],
+        ),
+      ),
+    );
+  }
 }
