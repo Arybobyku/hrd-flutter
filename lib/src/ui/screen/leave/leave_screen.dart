@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hrd/src/app_router.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/core/core.dart';
 import 'package:hrd/src/ui/ui.dart';
-import 'package:hrd/src/ui/widget/report_card.dart';
 
 class LeaveScreen extends StatefulWidget {
   const LeaveScreen({Key? key}) : super(key: key);
@@ -79,9 +77,9 @@ class LeaveView extends StatelessWidget with WidgetMixin {
                   itemCount: listLeave.length,
                   itemBuilder: (context, index) {
                     return ReportCard(
-                      title: 'Pengajuan Cuti',
+                      title: listLeave[index].reasons ?? "-",
                       value:
-                          "${listLeave[index].startDate} To ${listLeave[index].startDate}",
+                          "${listLeave[index].startDate}",
                       status: listLeave[index].status ?? "-",
                     );
                   },

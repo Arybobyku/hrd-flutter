@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/common/mixin/status_mixin.dart';
 
-class ReportCard extends StatelessWidget with StatusMixin {
+class ReportCard extends StatelessWidget with StatusMixin, WidgetMixin {
   final String title;
   final String value;
   final String status;
 
-  const ReportCard({
+   ReportCard({
     Key? key,
     required this.title,
     required this.value,
@@ -29,15 +29,20 @@ class ReportCard extends StatelessWidget with StatusMixin {
               children: [
                 Text(
                   title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: DartDroidFonts.bold(fontSize: 16),
                 ),
                 Text(
                   value,
-                  style: DartDroidFonts.normal(),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: DartDroidFonts.normal(fontSize: 14),
                 ),
               ],
             ),
           ),
+          horizontalSpace20,
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
             decoration: BoxDecoration(
