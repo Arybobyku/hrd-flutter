@@ -161,6 +161,7 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin, WidgetMixin {
             label: "Password",
             //TODO: REMOVE
             initialValue: password,
+
             onChange: (value) {
               password = value;
             },

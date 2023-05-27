@@ -38,6 +38,8 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
 
   @override
   Future<void> saveUserToLocalStorage(User user) async {
+    await localStorageClient.saveByKey(
+        user.accessToken, SharedPrefKey.token, SharedPrefType.STRING);
     return await localStorageClient.saveByKey(
       jsonEncode(user.toJson()),
       SharedPrefKey.user,
@@ -56,13 +58,13 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
     required String userName,
     required String password,
   }) async {
-    Response response =
-        await apiClient.post(Url.baseUrl + Url.login, queryParams: {
-      'email': userName,
-      'password': password,
-    }, headers: {
-      "Accept": "application/json",
-    });
+    Response response = await apiClient.post(
+      Url.baseUrl + Url.login,
+      queryParams: {
+        'email': userName,
+        'password': password,
+      },
+    );
 
     User? user = BaseResponse<User>.fromJson(
       response.data,
@@ -103,7 +105,7 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
   Future signOut(String token) async {
     await apiClient.post(
       Url.baseUrl + Url.logout,
-      token: token,
+      // token: token,
       headers: {
         "Accept": "application/json",
       },

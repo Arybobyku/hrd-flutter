@@ -3,7 +3,7 @@ import 'package:hrd/src/common/utility/dartdroid_fonts.dart';
 
 import '../../common/common.dart';
 
-class TextFormFieldRounded extends StatelessWidget with WidgetMixin{
+class TextFormFieldRounded extends StatelessWidget with WidgetMixin {
   final String? title;
   final bool isRequired;
   final String? initialValue;
@@ -79,7 +79,7 @@ class TextFormFieldRounded extends StatelessWidget with WidgetMixin{
           keyboardType: keyboardType,
           readOnly: readOnly,
           minLines: minLines,
-          maxLines: 10,
+          maxLines: secureText ? 1 : 10,
           decoration: InputDecoration(
             errorText: errorText,
             filled: false,

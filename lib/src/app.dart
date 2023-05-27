@@ -15,19 +15,22 @@ class App extends StatelessWidget {
 
   /// REPOSITORY
   final BaseAuthenticationRepository authenticationRepository;
+  final BaseLeaveRepository leaveRepository;
 
-  const App(
-      {Key? key,
-      required this.connectivity,
-      required this.connectionService,
-      required this.authenticationRepository})
-      : super(key: key);
+  const App({
+    Key? key,
+    required this.connectivity,
+    required this.connectionService,
+    required this.authenticationRepository,
+    required this.leaveRepository,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (context) => connectionService),
+        RepositoryProvider(create: (context) => leaveRepository),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -85,8 +88,9 @@ class _DartdroidAppState extends State<DartdroidApp>
       initialRoute: RouteName.splashScreen,
       theme: ThemeData(
         scaffoldBackgroundColor: DartdroidColor.background,
-        appBarTheme:  AppBarTheme(
-          titleTextStyle: DartDroidFonts.bold(fontSize: 22,color: DartdroidColor.white),
+        appBarTheme: AppBarTheme(
+          titleTextStyle:
+              DartDroidFonts.bold(fontSize: 22, color: DartdroidColor.white),
           backgroundColor: DartdroidColor.primary,
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(

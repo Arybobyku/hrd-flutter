@@ -50,6 +50,10 @@ class DioClient extends BaseApiClient with LogMixin {
     errorInterceptorHandler.next(dioError);
   }
 
+  Future<String?> getToken() async  => await
+      localStorageClient.getByKey(SharedPrefKey.token, SharedPrefType.STRING)
+          as String?;
+
   @override
   Future<Response> get(
     String url, {
@@ -64,6 +68,8 @@ class DioClient extends BaseApiClient with LogMixin {
     if (headers != null) {
       headers.forEach((k, v) => _headers[k] = v);
     }
+
+    token = await getToken();
 
     if (token != null) _headers['Authorization'] = 'Bearer $token';
 
@@ -148,9 +154,13 @@ class DioClient extends BaseApiClient with LogMixin {
   }) async {
     Map<String, dynamic> _headers = Map<String, dynamic>();
 
+    _headers["Accept"] = "application/json";
+
     if (headers != null) {
       headers.forEach((k, v) => _headers[k] = v);
     }
+
+    token = await getToken();
 
     if (token != null) _headers['Authorization'] = 'Bearer $token';
 

@@ -159,8 +159,17 @@ class DartdroidColor {
   /// blueLighten2
   static const Color blueLighten2 = Color(0xFFEAF6F8);
 
-
-
   static Color greenLighten1RGBA = const Color.fromRGBO(69, 174, 9, 1);
 
+  static Color greenBackgroundStatus = const Color(0xffb7efc5);
+
+  static Color greenTextStatus = const Color(0xff2dc653);
+
+  static Color redBackgroundStatus = const Color(0xFFFFE1E1);
+
+  static Color redTextStatus = const Color(0xFFE32538);
+
+  static const Color yellowTextStatus = Color(0xFFFF9604);
+
+  static const Color yellowBackgroundStatus = Color(0xFFF9EFBE);
 }
