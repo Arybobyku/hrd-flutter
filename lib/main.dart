@@ -50,21 +50,20 @@ void main() async {
     SystemUiOverlayStyle.light,
   );
 
-  BlocOverrides.runZoned(
-    () => runApp(
-      DartdroidBannerCard(
-        env: EnvConfig.env,
-        tag: EnvConfig.envTag,
-        child: App(
-          connectivity: connectivity,
-          connectionService: connectionService,
-          authenticationRepository: authenticationRepository,
-          leaveRepository: leaveRepository,
-        ),
+  Bloc.observer = MainBlocObserver(
+    loggerClient: loggerClient,
+  );
+
+  runApp(
+    DartdroidBannerCard(
+      env: EnvConfig.env,
+      tag: EnvConfig.envTag,
+      child: App(
+        connectivity: connectivity,
+        connectionService: connectionService,
+        authenticationRepository: authenticationRepository,
+        leaveRepository: leaveRepository,
       ),
-    ),
-    blocObserver: MainBlocObserver(
-      loggerClient: loggerClient,
     ),
   );
 }

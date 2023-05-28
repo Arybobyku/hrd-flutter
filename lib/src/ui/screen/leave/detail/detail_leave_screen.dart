@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hrd/src/common/common.dart';
-import 'package:hrd/src/common/model/model.dart';
 import 'package:hrd/src/ui/ui.dart';
 
 class DetailLeaveScreen extends StatefulWidget {
