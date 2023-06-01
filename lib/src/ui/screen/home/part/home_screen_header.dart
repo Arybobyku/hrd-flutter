@@ -57,7 +57,7 @@ class HomeScreenHeader extends StatelessWidget with WidgetMixin {
                   shape: BoxShape.circle,
                 ),
                 child: Text(
-                  "AB",
+                  "${user.firstName.firstLetter}${user.lastname.firstLetter}",
                   style: DartDroidFonts.bold(fontSize: 18),
                 ),
               )
