@@ -3,9 +3,8 @@ import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/common/mixin/date_mixin.dart';
 import 'package:hrd/src/core/core.dart';
-import 'package:intl/intl.dart';
 
-class LeaveRepository with DateMixin implements BaseLeaveRepository{
+class LeaveRepository with DateMixin implements BaseLeaveRepository {
   final BaseApiClient apiClient;
 
   LeaveRepository({required this.apiClient});

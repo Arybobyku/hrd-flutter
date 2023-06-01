@@ -1,8 +1,8 @@
 import 'package:hrd/src/common/common.dart';
 
 class Leave extends BaseModel {
-  final int? id;
-  final int? userId;
+  final String? id;
+  final String? userId;
   final String? startDate;
   final String? endDate;
   final String? approvalDate;

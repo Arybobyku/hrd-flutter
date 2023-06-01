@@ -3,9 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hrd/src/common/common.dart';
 
 class ErrorRefreshWidget extends StatelessWidget with WidgetMixin {
-  ErrorRefreshWidget({Key? key, required this.onRefresh}) : super(key: key);
+  ErrorRefreshWidget({Key? key, required this.onRefresh, this.message = "ERROR"}) : super(key: key);
 
   final Future<void> Function() onRefresh;
+
+  final String message;
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +20,13 @@ class ErrorRefreshWidget extends StatelessWidget with WidgetMixin {
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SvgPicture.asset(Asset.iconError, height: 300),
                   verticalSpace20,
                   Text(
-                    "ERROR",
+                    message,
+                    textAlign: TextAlign.center,
                     style: DartDroidFonts.bold(fontSize: 26),
                   )
                 ],

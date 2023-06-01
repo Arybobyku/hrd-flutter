@@ -37,12 +37,14 @@ class CreateLeaveFormCubit extends Cubit<BaseState<LeaveFormData>> {
     try {
       Meta meta = await leaveRepository.submitLeave(leave);
 
-      if (meta.code == 200) {
+      if (meta.code.success) {
         emit(
           SuccessState(
             data: leave,
           ),
         );
+      } else {
+        emit(ErrorState(error: meta.message));
       }
     } catch (e) {
       emit(
@@ -53,40 +55,4 @@ class CreateLeaveFormCubit extends Cubit<BaseState<LeaveFormData>> {
       );
     }
   }
-}
-
-class LeaveFormData extends BaseModel {
-  String? leaveTypes;
-  DateTime? startDate;
-  DateTime? endDate;
-  String? reasons;
-
-  LeaveFormData({
-    this.leaveTypes,
-    this.startDate,
-    this.endDate,
-    this.reasons,
-  });
-
-  @override
-  List<Object?> get props => [
-        leaveTypes,
-        startDate,
-        endDate,
-        reasons,
-      ];
-
-  @override
-  copyWith({
-    String? leaveTypes,
-    DateTime? startDate,
-    DateTime? endDate,
-    String? reasons,
-  }) =>
-      LeaveFormData(
-        leaveTypes: leaveTypes ?? this.leaveTypes,
-        startDate: startDate ?? this.startDate,
-        endDate: endDate ?? this.endDate,
-        reasons: reasons ?? this.reasons,
-      );
 }

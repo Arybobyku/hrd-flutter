@@ -8,6 +8,7 @@ class Url{
   static const String login = '/login';
   static const String logout = '/logout';
   static const String timeOff = '/time-off';
+  static const String overtime = '/overtime';
   static const String resetPassword = '/forgotPassword';
   static const String setPassword = '/changePassword';
 

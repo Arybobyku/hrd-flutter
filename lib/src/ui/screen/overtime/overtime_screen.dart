@@ -5,46 +5,46 @@ import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/core/core.dart';
 import 'package:hrd/src/ui/ui.dart';
 
-class LeaveScreen extends StatefulWidget {
-  const LeaveScreen({Key? key}) : super(key: key);
+class OvertimeScreen extends StatefulWidget {
+  const OvertimeScreen({Key? key}) : super(key: key);
 
   @override
-  State<LeaveScreen> createState() => _LeaveScreenState();
+  State<OvertimeScreen> createState() => _OvertimeScreenState();
 }
 
-class _LeaveScreenState extends State<LeaveScreen> {
+class _OvertimeScreenState extends State<OvertimeScreen> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LeaveDataCubit(
-            leaveRepository: context.read<BaseLeaveRepository>(),
+          create: (context) => OvertimeDataCubit(
+            overtimeRepository: context.read<BaseOvertimeRepository>(),
           )..initialize(),
         )
       ],
-      child: LeaveView(),
+      child: OvertimeView(),
     );
   }
 }
 
-class LeaveView extends StatelessWidget with WidgetMixin {
-  LeaveView({Key? key}) : super(key: key);
+class OvertimeView extends StatelessWidget with WidgetMixin {
+  OvertimeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cuti"),
+        title: const Text('Lembur'),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () =>
-            Navigator.pushNamed(context, RouteName.createLeaveScreen),
+            Navigator.pushNamed(context, RouteName.createOvertimeScreen),
       ),
       body: SafeArea(
-        child: BlocBuilder<LeaveDataCubit, BaseState>(
-          builder: (context, state) {
+        child: BlocBuilder<OvertimeDataCubit, BaseState>(
+          builder: (BuildContext context, state) {
             if (state is LoadingState) {
               return const Center(
                 child: CircularProgressIndicator(),
@@ -54,50 +54,48 @@ class LeaveView extends StatelessWidget with WidgetMixin {
             if (state is EmptyState) {
               return EmptyRefreshWidget(
                 onRefresh: () async {
-                  context.read<LeaveDataCubit>().initialize();
+                  context.read<OvertimeDataCubit>().initialize();
                 },
               );
             }
 
             if (state is ErrorState) {
               return ErrorRefreshWidget(
-                message: state.error,
                 onRefresh: () async {
-                  context.read<LeaveDataCubit>().initialize();
+                  context.read<OvertimeDataCubit>().initialize();
                 },
               );
             }
 
             if (state is LoadedState) {
-              var listLeave = (state.data as List<Leave>);
+              var listOvertime = (state.data as List<Overtime>);
               return RefreshIndicator(
                 onRefresh: () async {
                   context.read<LeaveDataCubit>().initialize();
                 },
                 child: ListView.builder(
-                  itemCount: listLeave.length,
+                  itemCount: listOvertime.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
                         Navigator.pushNamed(
-                          context,
-                          RouteName.detailLeaveScreen,
-                          arguments: ScreenArgument(
-                            data: listLeave[index],
-                          )
+                            context,
+                            RouteName.detailOvertimeScreen,
+                            arguments: ScreenArgument(
+                              data: listOvertime[index],
+                            )
                         );
                       },
                       child: ReportCard(
-                        title: listLeave[index].reasons ?? "-",
-                        value: "${listLeave[index].startDate}",
-                        status: listLeave[index].status ?? "-",
+                        title: listOvertime[index].startDate ?? "-",
+                        value: "${listOvertime[index].totalHours ?? "-"} jam",
+                        status: listOvertime[index].status ?? "-",
                       ),
                     );
                   },
                 ),
               );
             }
-
             return const SizedBox();
           },
         ),

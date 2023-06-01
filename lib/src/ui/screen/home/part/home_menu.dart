@@ -15,9 +15,9 @@ class HomeMenu extends StatelessWidget with WidgetMixin {
       navigate: RouteName.leaveScreen,
     ),
     Menu(
-      label: "Laporan",
+      label: "Lembur",
       icon: Asset.iconReport,
-      navigate: RouteName.leaveScreen,
+      navigate: RouteName.overtimeScreen,
     ),
   ];
 

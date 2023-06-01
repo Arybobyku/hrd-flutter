@@ -53,7 +53,7 @@ class AppRouter {
                 )
               : const SplashScreen(),
         );
-        case RouteName.landingScreen:
+      case RouteName.landingScreen:
         return MaterialPageRoute(
           settings: RouteSettings(
             name: RouteName.landingScreen,
@@ -66,7 +66,7 @@ class AppRouter {
                 )
               : const LandingScreen(),
         );
-        case RouteName.leaveScreen:
+      case RouteName.leaveScreen:
         return MaterialPageRoute(
           settings: RouteSettings(
             name: RouteName.leaveScreen,
@@ -79,7 +79,7 @@ class AppRouter {
                 )
               : const LeaveScreen(),
         );
-        case RouteName.createLeaveScreen:
+      case RouteName.createLeaveScreen:
         return MaterialPageRoute(
           settings: RouteSettings(
             name: RouteName.createLeaveScreen,
@@ -93,7 +93,7 @@ class AppRouter {
               : const CreateLeaveScreen(),
         );
 
-        case RouteName.detailLeaveScreen:
+      case RouteName.detailLeaveScreen:
         return MaterialPageRoute(
           settings: RouteSettings(
             name: RouteName.detailLeaveScreen,
@@ -106,7 +106,45 @@ class AppRouter {
                 )
               : const DetailLeaveScreen(),
         );
-
+      case RouteName.overtimeScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.overtimeScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const OvertimeScreen(),
+                )
+              : const OvertimeScreen(),
+        );
+      case RouteName.createOvertimeScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.createOvertimeScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const CreateOvertimeScreen(),
+                )
+              : const CreateOvertimeScreen(),
+        );
+      case RouteName.detailOvertimeScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.detailOvertimeScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const DetailOvertimeScreen(),
+                )
+              : const DetailOvertimeScreen(),
+        );
       default:
         return MaterialPageRoute(
           settings: const RouteSettings(
@@ -125,8 +163,13 @@ class RouteName {
   static const String loginScreen = "loginScreen";
   static const String registerScreen = "registerScreen";
   static const String landingScreen = "landingScreen";
+
   static const String leaveScreen = "leaveScreen";
   static const String createLeaveScreen = "createLeaveScreen";
   static const String detailLeaveScreen = "detailLeaveScreen";
+
+  static const String overtimeScreen = "overtimeScreen";
+  static const String createOvertimeScreen = "createOvertimeScreen";
+  static const String detailOvertimeScreen = "detailOvertimeScreen";
   static const String notFoundScreen = "notFoundScreen";
 }

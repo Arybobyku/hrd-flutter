@@ -129,7 +129,7 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin, WidgetMixin {
   }
 
   Widget body(BuildContext context) {
-    String username = "superadmin@gmail.com";
+    String username = "boby@gmail.com";
     String password = "12345678";
 
     return Container(
