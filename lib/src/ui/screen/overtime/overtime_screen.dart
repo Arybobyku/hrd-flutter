@@ -71,7 +71,7 @@ class OvertimeView extends StatelessWidget with WidgetMixin {
               var listOvertime = (state.data as List<Overtime>);
               return RefreshIndicator(
                 onRefresh: () async {
-                  context.read<LeaveDataCubit>().initialize();
+                  context.read<OvertimeDataCubit>().initialize();
                 },
                 child: ListView.builder(
                   itemCount: listOvertime.length,
