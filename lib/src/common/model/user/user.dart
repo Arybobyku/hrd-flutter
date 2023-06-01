@@ -110,9 +110,7 @@ class User extends BaseModel {
     String? accessToken,
     String? tokenType,
     UserIdentity? userIdentity,
-    OrganizationHierarchy? branch,
-    OrganizationHierarchy? department,
-    OrganizationHierarchy? position,
+    Employee? employee,
   }) =>
       User(
         id: id ?? this.id,
@@ -127,6 +125,7 @@ class User extends BaseModel {
         accessToken: accessToken ?? this.accessToken,
         tokenType: tokenType ?? this.tokenType,
         userIdentity: userIdentity ?? this.userIdentity,
+        employee: employee ?? this.employee,
       );
 
   @override

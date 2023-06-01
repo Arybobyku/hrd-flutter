@@ -15,7 +15,7 @@ class HomeScreenHeader extends StatelessWidget with WidgetMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "PT ENERGI BERSAMA",
+            user.employee?.branch?.name ?? "-",
             maxLines: 1,
             style: DartDroidFonts.bold(
               fontSize: 14,
@@ -40,7 +40,7 @@ class HomeScreenHeader extends StatelessWidget with WidgetMixin {
                     ),
                     verticalSpace(2),
                     Text(
-                      "Software Developer",
+                      user.employee?.position?.name ?? "-",
                       style: DartDroidFonts.normal(
                         fontSize: 14,
                         color: DartdroidColor.white,

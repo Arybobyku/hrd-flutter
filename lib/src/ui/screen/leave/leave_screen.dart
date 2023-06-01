@@ -39,8 +39,13 @@ class LeaveView extends StatelessWidget with WidgetMixin {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () =>
-            Navigator.pushNamed(context, RouteName.createLeaveScreen),
+        onPressed: () async {
+          var result =
+              await Navigator.pushNamed(context, RouteName.createLeaveScreen);
+          if (context.mounted && result is bool) {
+            context.read<LeaveDataCubit>().initialize();
+          }
+        },
       ),
       body: SafeArea(
         child: BlocBuilder<LeaveDataCubit, BaseState>(
@@ -80,12 +85,10 @@ class LeaveView extends StatelessWidget with WidgetMixin {
                     return InkWell(
                       onTap: () {
                         Navigator.pushNamed(
-                          context,
-                          RouteName.detailLeaveScreen,
-                          arguments: ScreenArgument(
-                            data: listLeave[index],
-                          )
-                        );
+                            context, RouteName.detailLeaveScreen,
+                            arguments: ScreenArgument(
+                              data: listLeave[index],
+                            ));
                       },
                       child: ReportCard(
                         title: listLeave[index].reasons ?? "-",

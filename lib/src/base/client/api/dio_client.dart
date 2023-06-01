@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/base/client/local_storage/base_local_storage_client.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/common/constant/share_pref_key.dart';
-
-import '../../common/exception.dart';
-import 'base_api_client.dart';
 
 class DioClient extends BaseApiClient with LogMixin {
   static const int _defaultMsTimeout = 20000;
@@ -50,9 +49,8 @@ class DioClient extends BaseApiClient with LogMixin {
     errorInterceptorHandler.next(dioError);
   }
 
-  Future<String?> getToken() async  => await
-      localStorageClient.getByKey(SharedPrefKey.token, SharedPrefType.STRING)
-          as String?;
+  Future<String?> getToken() async => await localStorageClient.getByKey(
+      SharedPrefKey.token, SharedPrefType.STRING) as String?;
 
   @override
   Future<Response> get(
@@ -63,15 +61,15 @@ class DioClient extends BaseApiClient with LogMixin {
     Map<String, dynamic>? headers,
     int msTimeout = 10000,
   }) async {
-    Map<String, dynamic> _headers = Map<String, dynamic>();
+    Map<String, dynamic> headers0 = <String, dynamic>{};
 
     if (headers != null) {
-      headers.forEach((k, v) => _headers[k] = v);
+      headers.forEach((k, v) => headers0[k] = v);
     }
 
     token = await getToken();
 
-    if (token != null) _headers['Authorization'] = 'Bearer $token';
+    if (token != null) headers0['Authorization'] = 'Bearer $token';
 
     _dio.options.connectTimeout = msTimeout;
     _dio.options.receiveTimeout = msTimeout;
@@ -79,7 +77,7 @@ class DioClient extends BaseApiClient with LogMixin {
     try {
       final response = await _dio.get(
         url,
-        options: Options(headers: _headers, responseType: responseType),
+        options: Options(headers: headers0, responseType: responseType),
         queryParameters: queryParams,
       );
 
@@ -107,28 +105,28 @@ class DioClient extends BaseApiClient with LogMixin {
     String contentType = 'application/json',
     int msTimeout = 10000,
   }) async {
-    Map<String, dynamic> _headers = Map<String, dynamic>();
+    Map<String, dynamic> headers0 = <String, dynamic>{};
 
     if (headers != null) {
-      headers.forEach((k, v) => _headers[k] = v);
+      headers.forEach((k, v) => headers0[k] = v);
     }
 
-    if (token != null) _headers['Authorization'] = 'Bearer $token';
+    if (token != null) headers0['Authorization'] = 'Bearer $token';
 
-    _headers['Content-Type'] = contentType;
+    headers0['Content-Type'] = contentType;
 
     _dio.options.connectTimeout = msTimeout;
     _dio.options.receiveTimeout = msTimeout;
 
     try {
-      final _response = await _dio.patch(
+      final response = await _dio.patch(
         url,
         data: data,
-        options: Options(headers: _headers),
+        options: Options(headers: headers0),
         queryParameters: queryParams,
       );
 
-      return _returnResponse(_response);
+      return _returnResponse(response);
     } on DioError catch (e) {
       if (e.type == DioErrorType.connectTimeout) {
         throw TimeoutException(e.error);
@@ -152,32 +150,32 @@ class DioClient extends BaseApiClient with LogMixin {
     String contentType = 'application/json',
     int msTimeout = 10000,
   }) async {
-    Map<String, dynamic> _headers = Map<String, dynamic>();
+    Map<String, dynamic> headers0 = <String, dynamic>{};
 
-    _headers["Accept"] = "application/json";
+    headers0["Accept"] = "application/json";
 
     if (headers != null) {
-      headers.forEach((k, v) => _headers[k] = v);
+      headers.forEach((k, v) => headers0[k] = v);
     }
 
     token = await getToken();
 
-    if (token != null) _headers['Authorization'] = 'Bearer $token';
+    if (token != null) headers0['Authorization'] = 'Bearer $token';
 
-    _headers['Content-Type'] = contentType;
+    headers0['Content-Type'] = contentType;
 
     _dio.options.connectTimeout = msTimeout;
     _dio.options.receiveTimeout = msTimeout;
 
     try {
-      final _response = await _dio.post(
+      final response = await _dio.post(
         url,
         data: data,
-        options: Options(headers: _headers),
+        options: Options(headers: headers0),
         queryParameters: queryParams,
       );
 
-      return _returnResponse(_response);
+      return _returnResponse(response);
     } on DioError catch (e) {
       if (e.type == DioErrorType.connectTimeout) {
         throw TimeoutException(e.error);
@@ -201,28 +199,28 @@ class DioClient extends BaseApiClient with LogMixin {
     String contentType = 'application/json',
     int msTimeout = 10000,
   }) async {
-    Map<String, dynamic> _headers = Map<String, dynamic>();
+    Map<String, dynamic> headers0 = <String, dynamic>{};
 
     if (headers != null) {
-      headers.forEach((k, v) => _headers[k] = v);
+      headers.forEach((k, v) => headers0[k] = v);
     }
 
-    if (token != null) _headers['Authorization'] = 'Bearer $token';
+    if (token != null) headers0['Authorization'] = 'Bearer $token';
 
-    _headers['Content-Type'] = contentType;
+    headers0['Content-Type'] = contentType;
 
     _dio.options.connectTimeout = msTimeout;
     _dio.options.receiveTimeout = msTimeout;
 
     try {
-      final _response = await _dio.delete(
+      final response = await _dio.delete(
         url,
         data: data,
-        options: Options(headers: _headers),
+        options: Options(headers: headers0),
         queryParameters: queryParams,
       );
 
-      return _returnResponse(_response);
+      return _returnResponse(response);
     } on DioError catch (e) {
       if (e.type == DioErrorType.connectTimeout) {
         throw TimeoutException(e.error);
@@ -246,28 +244,28 @@ class DioClient extends BaseApiClient with LogMixin {
     String contentType = 'application/json',
     int msTimeout = 10000,
   }) async {
-    Map<String, dynamic> _headers = Map<String, dynamic>();
+    Map<String, dynamic> headers0 = <String, dynamic>{};
 
     if (headers != null) {
-      headers.forEach((k, v) => _headers[k] = v);
+      headers.forEach((k, v) => headers0[k] = v);
     }
 
-    if (token != null) _headers['Authorization'] = 'Bearer $token';
+    if (token != null) headers0['Authorization'] = 'Bearer $token';
 
-    _headers['Content-Type'] = contentType;
+    headers0['Content-Type'] = contentType;
 
     _dio.options.connectTimeout = msTimeout;
     _dio.options.receiveTimeout = msTimeout;
 
     try {
-      final _response = await _dio.put(
+      final response = await _dio.put(
         url,
         data: data,
-        options: Options(headers: _headers),
+        options: Options(headers: headers0),
         queryParameters: queryParams,
       );
 
-      return _returnResponse(_response);
+      return _returnResponse(response);
     } on DioError catch (e) {
       if (e.type == DioErrorType.connectTimeout) {
         throw TimeoutException(e.error);
@@ -282,10 +280,21 @@ class DioClient extends BaseApiClient with LogMixin {
   }
 }
 
-_returnResponse(Response? response) {
+_returnResponse(Response? responseDio) {
+  dynamic response = responseDio;
+  try {
+    if(responseDio!.statusCode! >= 300){
+      response =
+          BaseResponse.fromJson(responseDio.data, (json) => null).meta.message;
+    }
+  } catch (e) {
+    debugPrint("UNRECOGNIZED SERVER MESSAGE $e");
+    response = responseDio;
+  }
+
   if (response == null) throw FetchDataException(response);
 
-  switch (response.statusCode) {
+  switch (responseDio?.statusCode) {
     case 200:
       return response;
     case 201:

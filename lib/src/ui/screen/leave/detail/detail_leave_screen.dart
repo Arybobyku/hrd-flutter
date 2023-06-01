@@ -49,12 +49,21 @@ class DetailLeaveView extends StatelessWidget with WidgetMixin {
                     ],
                   ),
                   TitleValueWidget(
-                      title: "Tgl Selesai", value: leave.endDate ?? "-"),
+                    title: "Tgl Selesai",
+                    value: leave.endDate ?? "-",
+                  ),
                   TitleValueWidget(
-                      title: "Deskripsi", value: leave.reasons ?? "-"),
-                  TitleValueWidget(title: "Catatan", value: leave.note ?? "-"),
+                    title: "Deskripsi",
+                    value: leave.reasons ?? "-",
+                  ),
                   TitleValueWidget(
-                      title: "Tgl Pengajuan", value: leave.createdAt ?? "-"),
+                    title: "Catatan",
+                    value: leave.note ?? "-",
+                  ),
+                  TitleValueWidget(
+                    title: "Tgl Pengajuan",
+                    value: leave.createdAt ?? "-",
+                  ),
                 ],
               )),
         ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
-import 'package:hrd/src/common/model/form_field_data/form_field_data.dart';
 import 'package:hrd/src/core/core.dart';
 import 'package:hrd/src/ui/ui.dart';
 
@@ -54,7 +53,7 @@ class CreateLeaveView extends StatelessWidget
                 description: "Berhasil mengajukan cuti",
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 },
               );
             }
@@ -102,9 +101,14 @@ class CreateLeaveView extends StatelessWidget
                                     firstData: DateTime.now(),
                                   );
 
-                                  context
-                                      .read<CreateLeaveFormCubit>()
-                                      .updateFormStartDate(state.data!, date!);
+                                  if (context.mounted && date != null) {
+                                    context
+                                        .read<CreateLeaveFormCubit>()
+                                        .updateFormStartDate(
+                                          state.data!,
+                                          date,
+                                        );
+                                  }
                                 },
                               ),
                             ),
@@ -122,9 +126,11 @@ class CreateLeaveView extends StatelessWidget
                                       await showDatePickerDialog(context,
                                           firstData: DateTime.now());
 
-                                  context
-                                      .read<CreateLeaveFormCubit>()
-                                      .updateFormEndData(state.data!, date!);
+                                  if (context.mounted && date != null) {
+                                    context
+                                        .read<CreateLeaveFormCubit>()
+                                        .updateFormEndData(state.data!, date);
+                                  }
                                 },
                               ),
                             ),

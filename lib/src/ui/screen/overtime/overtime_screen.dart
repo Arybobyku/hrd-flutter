@@ -39,8 +39,14 @@ class OvertimeView extends StatelessWidget with WidgetMixin {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () =>
-            Navigator.pushNamed(context, RouteName.createOvertimeScreen),
+        onPressed: () async {
+          var result = await Navigator.pushNamed(
+              context, RouteName.createOvertimeScreen);
+
+          if (context.mounted && result is bool) {
+            context.read<OvertimeDataCubit>().initialize();
+          }
+        },
       ),
       body: SafeArea(
         child: BlocBuilder<OvertimeDataCubit, BaseState>(
@@ -79,12 +85,10 @@ class OvertimeView extends StatelessWidget with WidgetMixin {
                     return InkWell(
                       onTap: () {
                         Navigator.pushNamed(
-                            context,
-                            RouteName.detailOvertimeScreen,
+                            context, RouteName.detailOvertimeScreen,
                             arguments: ScreenArgument(
                               data: listOvertime[index],
-                            )
-                        );
+                            ));
                       },
                       child: ReportCard(
                         title: listOvertime[index].startDate ?? "-",

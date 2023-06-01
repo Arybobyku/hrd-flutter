@@ -27,4 +27,28 @@ mixin CalendarMixin {
       },
     );
   }
+
+  Future showTimePickerDialog(BuildContext context, {TimeOfDay? initialTime}) {
+    return showTimePicker(
+      context: context,
+      initialEntryMode: TimePickerEntryMode.dial,
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: DartdroidColor.primary,
+              onPrimary: DartdroidColor.white,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: DartdroidColor.primary,
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+      initialTime: initialTime ?? const TimeOfDay(hour: 0, minute: 0),
+    );
+  }
 }

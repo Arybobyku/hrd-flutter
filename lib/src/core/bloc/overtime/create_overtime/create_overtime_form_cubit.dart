@@ -2,12 +2,12 @@ import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/core/core.dart';
 
-class CreateOvertimeFormCubit extends Cubit<BaseState> {
+class CreateOvertimeFormCubit extends Cubit<BaseState<OvertimeFormData>> {
   final BaseOvertimeRepository overtimeRepository;
 
   CreateOvertimeFormCubit({
     required this.overtimeRepository,
-  }) : super(InitializedState());
+  }) : super(InitializedState(data: OvertimeFormData()));
 
   void updateFormStartDate(OvertimeFormData latestFormData, DateTime value) {
     latestFormData = latestFormData.copyWith(startDate: value);
@@ -29,7 +29,7 @@ class CreateOvertimeFormCubit extends Cubit<BaseState> {
     emit(LoadedState(data: latestFormData));
   }
 
-  void submitFormLeave(OvertimeFormData overtime) async {
+  void submitFormOvertime(OvertimeFormData overtime) async {
     emit(LoadingState(
       data: overtime,
     ));
