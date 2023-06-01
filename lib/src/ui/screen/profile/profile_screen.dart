@@ -44,7 +44,7 @@ class ProfileView extends StatelessWidget with WidgetMixin {
                         shape: BoxShape.circle,
                       ),
                       child: Text(
-                        "AB",
+                        "${user.firstName.firstLetter}${user.lastname.firstLetter}",
                         style: DartDroidFonts.bold(fontSize: 18),
                       ),
                     ),
@@ -59,7 +59,7 @@ class ProfileView extends StatelessWidget with WidgetMixin {
                     ),
                     verticalSpace(2),
                     Text(
-                      "PT Dartdroid Indonesia",
+                      user.employee?.branch?.name ?? "-",
                       style: DartDroidFonts.normal(
                         fontSize: 14,
                         color: DartdroidColor.white,
@@ -105,7 +105,9 @@ class ProfileView extends StatelessWidget with WidgetMixin {
                         ButtonRounded(
                           text: "Keluar",
                           invert: true,
-                          onPressed: ()=> context.read<AuthenticationActionCubit>().signOut(user.accessToken!),
+                          onPressed: () => context
+                              .read<AuthenticationActionCubit>()
+                              .signOut(user.accessToken!),
                         ),
                       ],
                     ),
