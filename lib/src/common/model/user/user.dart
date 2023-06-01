@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:hrd/src/common/common.dart';
 
 class User extends BaseModel {
-  final int? id;
+  final String? id;
   final int? role;
   final String? firstName;
   final String? lastname;
@@ -12,6 +14,8 @@ class User extends BaseModel {
   final String? religion;
   final String? accessToken;
   final String? tokenType;
+  final UserIdentity? userIdentity;
+  final Employee? employee;
 
   User({
     this.id,
@@ -25,6 +29,8 @@ class User extends BaseModel {
     this.mobilePhone,
     this.religion,
     this.tokenType,
+    this.userIdentity,
+    this.employee,
   });
 
   factory User.fromJsonAPI(Map<String, dynamic> json) => User(
@@ -37,6 +43,16 @@ class User extends BaseModel {
         martialStatus: json['martial_status'],
         religion: json['religion'],
         bloodType: json['blood_type'],
+        userIdentity: json['user_identity'] != null
+            ? UserIdentity.fromJsonApi(
+                json['user_identity'],
+              )
+            : null,
+        employee: json['employee'] != null
+            ? Employee.fromJsonApi(
+                json['employee'],
+              )
+            : null,
       );
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -51,6 +67,16 @@ class User extends BaseModel {
         bloodType: json['blood_type'],
         accessToken: json['access-token'],
         tokenType: json['token-type'],
+        userIdentity: json['user_identity'] != null
+            ? UserIdentity.fromJsonApi(
+                jsonDecode(json['user_identity']),
+              )
+            : null,
+        employee: json['employee'] != null
+            ? Employee.fromJson(
+                jsonDecode(json['employee']),
+              )
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -65,11 +91,14 @@ class User extends BaseModel {
         "mobile_phone": mobilePhone,
         "religion": religion,
         "token-type": tokenType,
+        "user_identity":
+            userIdentity != null ? jsonEncode(userIdentity!.toJson()) : null,
+        "employee": employee != null ? jsonEncode(employee!.toJson()) : null,
       };
 
   @override
   copyWith({
-    int? id,
+    String? id,
     int? role,
     String? firstName,
     String? lastname,
@@ -80,6 +109,10 @@ class User extends BaseModel {
     String? religion,
     String? accessToken,
     String? tokenType,
+    UserIdentity? userIdentity,
+    OrganizationHierarchy? branch,
+    OrganizationHierarchy? department,
+    OrganizationHierarchy? position,
   }) =>
       User(
         id: id ?? this.id,
@@ -93,6 +126,7 @@ class User extends BaseModel {
         religion: religion ?? this.religion,
         accessToken: accessToken ?? this.accessToken,
         tokenType: tokenType ?? this.tokenType,
+        userIdentity: userIdentity ?? this.userIdentity,
       );
 
   @override
