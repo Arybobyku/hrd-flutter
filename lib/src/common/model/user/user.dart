@@ -16,6 +16,7 @@ class User extends BaseModel {
   final String? tokenType;
   final UserIdentity? userIdentity;
   final Employee? employee;
+  final UserShift? userShift;
 
   User({
     this.id,
@@ -31,6 +32,7 @@ class User extends BaseModel {
     this.tokenType,
     this.userIdentity,
     this.employee,
+    this.userShift,
   });
 
   factory User.fromJsonAPI(Map<String, dynamic> json) => User(
@@ -44,14 +46,13 @@ class User extends BaseModel {
         religion: json['religion'],
         bloodType: json['blood_type'],
         userIdentity: json['user_identity'] != null
-            ? UserIdentity.fromJsonApi(
-                json['user_identity'],
-              )
+            ? UserIdentity.fromJsonApi(json['user_identity'])
             : null,
         employee: json['employee'] != null
-            ? Employee.fromJsonApi(
-                json['employee'],
-              )
+            ? Employee.fromJsonApi(json['employee'])
+            : null,
+        userShift: json['user_shift'] != null
+            ? UserShift.fromJsonApi(json['user_shift'])
             : null,
       );
 
@@ -68,14 +69,13 @@ class User extends BaseModel {
         accessToken: json['access-token'],
         tokenType: json['token-type'],
         userIdentity: json['user_identity'] != null
-            ? UserIdentity.fromJsonApi(
-                jsonDecode(json['user_identity']),
-              )
+            ? UserIdentity.fromJsonApi(jsonDecode(json['user_identity']))
             : null,
         employee: json['employee'] != null
-            ? Employee.fromJson(
-                jsonDecode(json['employee']),
-              )
+            ? Employee.fromJson(jsonDecode(json['employee']))
+            : null,
+        userShift: json['user_shift'] != null
+            ? UserShift.fromJson(jsonDecode(json['user_shift']))
             : null,
       );
 
@@ -94,6 +94,8 @@ class User extends BaseModel {
         "user_identity":
             userIdentity != null ? jsonEncode(userIdentity!.toJson()) : null,
         "employee": employee != null ? jsonEncode(employee!.toJson()) : null,
+        "user_shift":
+            userShift != null ? jsonEncode(userShift!.toJson()) : null,
       };
 
   @override
@@ -111,6 +113,7 @@ class User extends BaseModel {
     String? tokenType,
     UserIdentity? userIdentity,
     Employee? employee,
+    UserShift? userShift,
   }) =>
       User(
         id: id ?? this.id,
@@ -126,6 +129,7 @@ class User extends BaseModel {
         tokenType: tokenType ?? this.tokenType,
         userIdentity: userIdentity ?? this.userIdentity,
         employee: employee ?? this.employee,
+        userShift: userShift ?? this.userShift,
       );
 
   @override
@@ -141,5 +145,6 @@ class User extends BaseModel {
         mobilePhone,
         religion,
         tokenType,
+        userIdentity,
       ];
 }
