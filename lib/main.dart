@@ -44,6 +44,10 @@ void main() async {
     apiClient: apiClient,
   );
 
+  final BaseAttendanceRepository attendanceRepository = AttendanceRepository(
+    apiClient: apiClient,
+  );
+
   // Disable Landscape Mode
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
@@ -68,6 +72,7 @@ void main() async {
         authenticationRepository: authenticationRepository,
         leaveRepository: leaveRepository,
         overtimeRepository: overtimeRepository,
+        attendanceRepository: attendanceRepository,
       ),
     ),
   );
