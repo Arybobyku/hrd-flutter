@@ -17,6 +17,7 @@ class App extends StatelessWidget {
   final BaseAuthenticationRepository authenticationRepository;
   final BaseLeaveRepository leaveRepository;
   final BaseOvertimeRepository overtimeRepository;
+  final BaseAttendanceRepository attendanceRepository;
 
   const App({
     Key? key,
@@ -25,6 +26,7 @@ class App extends StatelessWidget {
     required this.authenticationRepository,
     required this.leaveRepository,
     required this.overtimeRepository,
+    required this.attendanceRepository,
   }) : super(key: key);
 
   @override
@@ -34,6 +36,7 @@ class App extends StatelessWidget {
         RepositoryProvider(create: (context) => connectionService),
         RepositoryProvider(create: (context) => leaveRepository),
         RepositoryProvider(create: (context) => overtimeRepository),
+        RepositoryProvider(create: (context) => attendanceRepository),
       ],
       child: MultiBlocProvider(
         providers: [
