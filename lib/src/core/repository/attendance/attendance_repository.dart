@@ -26,7 +26,7 @@ class AttendanceRepository with DateMixin implements BaseAttendanceRepository {
 
   @override
   Future<Meta> clockOut(Attendance attendance) async {
-    Response response = await apiClient.post(Url.baseUrl + Url.clockin, data: {
+    Response response = await apiClient.post(Url.baseUrl + Url.clockout, data: {
       "id": attendance.id,
       "clockout_time": attendance.clockoutTime,
     });
@@ -40,9 +40,11 @@ class AttendanceRepository with DateMixin implements BaseAttendanceRepository {
   Future<Attendance?> getCurrentDateAttendance() async {
     Response response =
         await apiClient.get(Url.baseUrl + Url.currentDayAttendance);
-
-    Attendance? attendance = BaseResponse<Attendance?>.fromJson(response.data,
-        (json) => Attendance.fromJsonApi(json as Map<String, dynamic>)).data;
+    Attendance? attendance;
+    if (response.data['data'] != null) {
+      attendance = BaseResponse<Attendance?>.fromJson(response.data,
+          (json) => Attendance.fromJsonApi(json as Map<String, dynamic>)).data;
+    }
 
     return attendance;
   }

@@ -5,7 +5,8 @@ import 'package:hrd/src/common/common.dart';
 class ButtonRounded extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
-  final bool disabled;
+  final Color? backgroundColor;
+  final Color? textColor;
   final bool invert;
   final FontWeight fontWeight;
   final double borderRadius;
@@ -16,7 +17,8 @@ class ButtonRounded extends StatelessWidget {
     required this.text,
     this.borderRadius = 10,
     this.invert = false,
-    this.disabled = false,
+    this.backgroundColor,
+    this.textColor,
     this.fontWeight = FontWeight.normal,
   }) : super(key: key);
 
@@ -25,11 +27,9 @@ class ButtonRounded extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: disabled
-            ? DartdroidColor.greyLighten70
-            : invert
+        color: backgroundColor ?? (invert
                 ? DartdroidColor.white
-                : DartdroidColor.primary,
+                : DartdroidColor.primary),
         borderRadius: BorderRadius.circular(borderRadius),
         border: invert ? Border.all(color: DartdroidColor.primary) : null,
       ),
@@ -38,8 +38,8 @@ class ButtonRounded extends StatelessWidget {
         child: Text(
           text,
           style: DartDroidFonts.customFontWeight(
-            color: disabled
-                ? DartdroidColor.greyLighten10
+            color: textColor != null
+                ? textColor!
                 : invert
                     ? DartdroidColor.primary
                     : DartdroidColor.white,
