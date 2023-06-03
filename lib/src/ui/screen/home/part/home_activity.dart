@@ -57,6 +57,16 @@ class HomeActivity extends StatelessWidget
                         );
                       }
 
+                      if (user.userShift == null) {
+                        return Text(
+                          "Anda belum memiliki shift kerja. Harap menghubungi admin terkait.",
+                          style: DartDroidFonts.normal(
+                            fontSize: 14,
+                          ),
+                          textAlign: TextAlign.center,
+                        );
+                      }
+
                       return AttendanceCard(
                         shift: user.userShift?.shift,
                         organizationHierarchy: user.employee?.branch,
