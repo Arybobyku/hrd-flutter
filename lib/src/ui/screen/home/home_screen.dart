@@ -35,27 +35,53 @@ class _HomeScreenState extends State<HomeScreen> {
             attendanceRepository: context.read<BaseAttendanceRepository>(),
           ),
         ),
+        BlocProvider(
+          create: (context) =>
+              UserCubit(userRepository: context.read<BaseUserRepository>())
+                ..initialize(),
+        ),
       ],
       child: HomeView(),
     );
   }
 }
 
-class HomeView extends StatelessWidget with WidgetMixin {
+class HomeView extends StatelessWidget with WidgetMixin, SnackBarMessageMixin {
   HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     User user = context.read<AuthenticationDataCubit>().state.data;
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //Header
-          HomeScreenHeader(user: user),
-          HomeMenu(),
-          HomeActivity(),
-        ],
+    return BlocListener<UserCubit, BaseState>(
+      listener: (context, state) {
+        if (state is LoadedState) {
+          context.read<AuthenticationDataCubit>().initialize();
+        }
+
+        if (state is ErrorState) {
+          showSnackBarMessage(context, "Gagal mengambil data user dari server");
+        }
+      },
+      child: RefreshIndicator(
+        onRefresh: () async {
+          await context.read<UserCubit>().initialize();
+        },
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //Header
+                  HomeScreenHeader(user: user),
+                  HomeMenu(),
+                  HomeActivity(),
+                ],
+              ),
+            ),
+            ListView(),
+          ],
+        ),
       ),
     );
   }

@@ -18,18 +18,19 @@ class AuthenticationDataCubit extends Cubit<BaseState> {
   void initialize() async {
     String? rawUser;
     User? user;
+    try {
+      rawUser = await authenticationRepository.getUSerFromLocalStorage();
+      if (rawUser != null) {
+        user = User.fromJson(jsonDecode(rawUser));
+      }
 
-    rawUser = await authenticationRepository.getUSerFromLocalStorage();
-    if (rawUser != null) {
-      user = User.fromJson(jsonDecode(rawUser));
+      if (user == null) {
+        return emit(UnauthenticatedState());
+      }
+
+      emit(AuthenticatedState(data: user));
+    } catch (e) {
+      emit(ErrorState(error: e.toString()));
     }
-
-    if (user == null) {
-      return emit(UnauthenticatedState());
-    }
-
-    print("CALLED");
-
-    emit(AuthenticatedState(data: user));
   }
 }

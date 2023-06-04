@@ -48,6 +48,11 @@ void main() async {
     apiClient: apiClient,
   );
 
+  final BaseUserRepository userRepository = UserRepository(
+    apiClient: apiClient,
+    localStorageClient: localStorageClient,
+  );
+
   // Disable Landscape Mode
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
@@ -73,6 +78,7 @@ void main() async {
         leaveRepository: leaveRepository,
         overtimeRepository: overtimeRepository,
         attendanceRepository: attendanceRepository,
+        userRepository: userRepository,
       ),
     ),
   );

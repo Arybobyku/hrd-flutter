@@ -57,7 +57,7 @@ class HomeActivity extends StatelessWidget
                         );
                       }
 
-                      if (user.userShift == null) {
+                      if (user.userShift?.shift == null) {
                         return Text(
                           "Anda belum memiliki shift kerja. Harap menghubungi admin terkait.",
                           style: DartDroidFonts.normal(

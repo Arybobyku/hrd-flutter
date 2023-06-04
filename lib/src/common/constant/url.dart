@@ -15,5 +15,6 @@ class Url{
   static const String attendance = '/attendance';
   static const String resetPassword = '/forgotPassword';
   static const String setPassword = '/changePassword';
+  static const String me = '/me';
 
 }
