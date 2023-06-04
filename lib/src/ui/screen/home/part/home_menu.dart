@@ -3,21 +3,21 @@ part of '../home_screen.dart';
 class HomeMenu extends StatelessWidget with WidgetMixin {
   HomeMenu({Key? key}) : super(key: key);
 
-  List<Menu> menus = [
+  final List<Menu> menus = [
     Menu(
       label: "Cuti",
       icon: Asset.iconLeave,
       navigate: RouteName.leaveScreen,
     ),
     Menu(
-      label: "Absen",
-      icon: Asset.iconAttendance,
-      navigate: RouteName.leaveScreen,
-    ),
-    Menu(
       label: "Lembur",
       icon: Asset.iconReport,
       navigate: RouteName.overtimeScreen,
+    ),
+    Menu(
+      label: "Absen",
+      icon: Asset.iconAttendance,
+      navigate: RouteName.attendanceScreen,
     ),
   ];
 

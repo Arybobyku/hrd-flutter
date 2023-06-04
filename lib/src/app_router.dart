@@ -145,6 +145,19 @@ class AppRouter {
                 )
               : const DetailOvertimeScreen(),
         );
+      case RouteName.attendanceScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.attendanceScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const AttendanceScreen(),
+                )
+              : const AttendanceScreen(),
+        );
       default:
         return MaterialPageRoute(
           settings: const RouteSettings(
@@ -167,6 +180,8 @@ class RouteName {
   static const String leaveScreen = "leaveScreen";
   static const String createLeaveScreen = "createLeaveScreen";
   static const String detailLeaveScreen = "detailLeaveScreen";
+
+  static const String attendanceScreen = "attendanceScreen";
 
   static const String overtimeScreen = "overtimeScreen";
   static const String createOvertimeScreen = "createOvertimeScreen";

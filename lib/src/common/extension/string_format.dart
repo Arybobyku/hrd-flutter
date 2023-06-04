@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 
 extension StringFormatMixin on String? {
   String get firstLetter {
-    return this?[0] ?? "";
+    return this?[0].toUpperCase() ?? "";
   }
 
   String get timeFormat{

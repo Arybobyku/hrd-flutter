@@ -50,7 +50,7 @@ class ProfileView extends StatelessWidget with WidgetMixin {
                     ),
                     verticalSpace20,
                     Text(
-                      "${user.firstName ?? ""} ${user.lastname}",
+                      "${user.firstName?.toUpperCase() ?? ""} ${user.lastname?.toUpperCase()}",
                       maxLines: 1,
                       style: DartDroidFonts.bold(
                         fontSize: 18,

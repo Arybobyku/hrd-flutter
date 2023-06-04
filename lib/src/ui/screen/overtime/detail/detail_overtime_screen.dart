@@ -33,6 +33,7 @@ class DetailOvertimeView extends StatelessWidget with WidgetMixin {
       appBar: AppBar(
         title: const Text("Detail Lembur"),
       ),
+      backgroundColor: DartdroidColor.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

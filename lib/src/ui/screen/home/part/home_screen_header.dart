@@ -31,7 +31,7 @@ class HomeScreenHeader extends StatelessWidget with WidgetMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${user.firstName ?? ""} ${user.lastname}",
+                      "${user.firstName?.toUpperCase() ?? ""} ${user.lastname?.toUpperCase()}",
                       maxLines: 1,
                       style: DartDroidFonts.bold(
                         fontSize: 22,
