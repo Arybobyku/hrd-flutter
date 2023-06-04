@@ -85,14 +85,16 @@ class LeaveView extends StatelessWidget with WidgetMixin {
                     return InkWell(
                       onTap: () {
                         Navigator.pushNamed(
-                            context, RouteName.detailLeaveScreen,
-                            arguments: ScreenArgument(
-                              data: listLeave[index],
-                            ));
+                          context,
+                          RouteName.detailLeaveScreen,
+                          arguments: ScreenArgument(
+                            data: listLeave[index],
+                          ),
+                        );
                       },
                       child: ReportCard(
-                        title: listLeave[index].reasons ?? "-",
-                        value: "${listLeave[index].startDate}",
+                        title: listLeave[index].type ?? "-",
+                        value: "${listLeave[index].reasons}",
                         status: listLeave[index].status ?? "-",
                       ),
                     );

@@ -67,22 +67,21 @@ class CreateLeaveView extends StatelessWidget
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       children: [
-                        // verticalSpace20,
-                        // DropDownWidget(
-                        //   title: "Jenis Cuti",
-                        //   isRequired: true,
-                        //   items: const [
-                        //     {'key': 1, 'value': "BARU"},
-                        //     {'key': 2, 'value': "PENGGANTIAN"},
-                        //     {'key': 3, 'value': "PERPANJANGAN"},
-                        //   ],
-                        //   callbackWithoutValidator: (val) {
-                        //     context
-                        //         .read<CreateLeaveFormCubit>()
-                        //         .updateFormLeaveTypes(
-                        //             state.data!, val!.values.toString());
-                        //   },
-                        // ),
+                        verticalSpace20,
+                        DropDownWidget(
+                          title: "Jenis Cuti",
+                          isRequired: true,
+                          hint: "Jenis Cuti",
+                          items: StringConstants.leaveTypes
+                              .map((e) => {"key": e, "value": e})
+                              .toList(),
+                          callbackWithoutValidator: (val) {
+                            context
+                                .read<CreateLeaveFormCubit>()
+                                .updateFormLeaveType(
+                                    state.data!, val!.values.first);
+                          },
+                        ),
                         verticalSpace20,
                         Row(
                           children: [
@@ -150,6 +149,7 @@ class CreateLeaveView extends StatelessWidget
                             BaseState<LeaveFormData>, FormFieldData>(
                           selector: (state) => FormFieldData(
                             validate: [
+                              state.data!.leaveTypes,
                               state.data!.reasons,
                               state.data!.startDate,
                               state.data!.endDate,

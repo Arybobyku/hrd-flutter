@@ -9,6 +9,7 @@ class Leave extends BaseModel {
   final String? status;
   final String? reasons;
   final String? note;
+  final String? type;
   final String? createdAt;
   final String? updatedAt;
 
@@ -22,6 +23,7 @@ class Leave extends BaseModel {
     this.updatedAt,
     this.approvalDate,
     this.note,
+    this.type,
     this.reasons,
   });
 
@@ -39,6 +41,7 @@ class Leave extends BaseModel {
     status: json['status'],
     approvalDate: json['approval_date'],
     note: json['note'],
+    type: json['type'],
     createdAt: json['created_at'],
     updatedAt: json['updated_at'],
     reasons: json['reasons'],
@@ -56,5 +59,6 @@ class Leave extends BaseModel {
     approvalDate,
     note,
     reasons,
+    type,
   ];
 }

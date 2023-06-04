@@ -32,6 +32,7 @@ class LeaveRepository with DateMixin implements BaseLeaveRepository {
   @override
   Future<Meta> submitLeave(LeaveFormData leave) async {
     Response response = await apiClient.post(Url.baseUrl + Url.timeOff, data: {
+      "type": leave.leaveTypes,
       "start_date": parseDate(leave.startDate!),
       "end_date": parseDate(leave.endDate!),
       "reasons": leave.reasons,

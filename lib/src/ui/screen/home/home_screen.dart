@@ -66,20 +66,12 @@ class HomeView extends StatelessWidget with WidgetMixin, SnackBarMessageMixin {
         onRefresh: () async {
           await context.read<UserCubit>().initialize();
         },
-        child: Stack(
+        child: ListView(
           children: [
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //Header
-                  HomeScreenHeader(user: user),
-                  HomeMenu(),
-                  HomeActivity(),
-                ],
-              ),
-            ),
-            ListView(),
+            //Header
+            HomeScreenHeader(user: user),
+            HomeMenu(),
+            HomeActivity(),
           ],
         ),
       ),

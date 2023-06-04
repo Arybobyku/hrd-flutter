@@ -8,12 +8,10 @@ class CreateLeaveFormCubit extends Cubit<BaseState<LeaveFormData>> {
   CreateLeaveFormCubit({required this.leaveRepository})
       : super(InitializedState(data: LeaveFormData()));
 
-  //TODO: BOBY
-  // void updateFormLeaveTypes(LeaveFormData latestFormData, String value) {
-  //   latestFormData = latestFormData.copyWith(leaveTypes: value);
-  //   emit(LoadedState(data: latestFormData));
-  // }
-
+  void updateFormLeaveType(LeaveFormData latestFormData, String value) {
+    latestFormData = latestFormData.copyWith(leaveTypes: value);
+    emit(LoadedState(data: latestFormData));
+  }
   void updateFormStartDate(LeaveFormData latestFormData, DateTime value) {
     latestFormData = latestFormData.copyWith(startDate: value);
     emit(LoadedState(data: latestFormData));

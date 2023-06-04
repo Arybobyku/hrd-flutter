@@ -31,6 +31,7 @@ class DetailLeaveView extends StatelessWidget with WidgetMixin {
       appBar: AppBar(
         title: const Text("Detail Cuti"),
       ),
+      backgroundColor: DartdroidColor.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -43,10 +44,16 @@ class DetailLeaveView extends StatelessWidget with WidgetMixin {
                     children: [
                       Expanded(
                         child: TitleValueWidget(
-                            title: "Tgl Mulai", value: leave.startDate ?? "-"),
+                          title: "Jenis Cuti",
+                          value: leave.type ?? "-",
+                        ),
                       ),
                       StatusCard(status: leave.status ?? "-")
                     ],
+                  ),
+                  TitleValueWidget(
+                    title: "Tgl Mulai",
+                    value: leave.startDate ?? "-",
                   ),
                   TitleValueWidget(
                     title: "Tgl Selesai",

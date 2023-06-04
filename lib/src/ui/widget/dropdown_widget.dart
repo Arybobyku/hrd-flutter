@@ -151,7 +151,7 @@ class _DropDownWidgetState extends State<DropDownWidget> with WidgetMixin {
           child: DropdownButtonFormField(
             key: _fieldKey,
             style: widget.fieldStyle ??
-                defaultStyle.copyWith(color: DartdroidColor.grey),
+                defaultStyle.copyWith(color: DartdroidColor.black),
             validator: widget.validators,
             icon: const Icon(Icons.keyboard_arrow_down_sharp),
             decoration: const InputDecoration(
@@ -174,7 +174,7 @@ class _DropDownWidgetState extends State<DropDownWidget> with WidgetMixin {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: widget.hintStyle ??
-                  defaultStyle.copyWith(color: DartdroidColor.black),
+                  defaultStyle.copyWith(color: DartdroidColor.grey),
               textAlign: TextAlign.start,
             ),
             items: _dropdownMenuItems,
