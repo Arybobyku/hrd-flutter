@@ -133,8 +133,19 @@ class AttendanceView extends StatelessWidget with WidgetMixin, StatusMixin {
                             ),
                             Padding(
                               padding: const EdgeInsets.all(10),
-                              child: StatusCard(
-                                status: attendances[index].status ?? "-",
+                              child: Column(
+                                children: [
+                                  StatusCard(
+                                    status: attendances[index].status ?? "-",
+                                  ),
+                                  verticalSpace5,
+                                  Text(
+                                    attendances[index].attendanceDate ?? "-",
+                                    style: DartDroidFonts.normal(
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
                               ),
                             )
                           ],
