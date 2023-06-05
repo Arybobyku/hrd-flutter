@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hrd/src/app_router.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/ui/ui.dart';
@@ -84,7 +85,11 @@ class ProfileView extends StatelessWidget with WidgetMixin {
                     TitleIconButton(
                       title: "Data Diri",
                       iconData: Icons.person,
-                      onTap: () {},
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        RouteName.profileDetailScreen,
+                        arguments: ScreenArgument(data: user),
+                      ),
                     ),
                     divider(),
                     TitleIconButton(

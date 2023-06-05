@@ -14,7 +14,7 @@ class TitleValueWidget extends StatelessWidget with WidgetMixin {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         verticalSpace10,
-        Text(title, style: DartDroidFonts.bold(fontSize: 14)),
+        Text(title, style: DartDroidFonts.normal(fontSize: 12,color: DartdroidColor.grey)),
         Text(
           value,
           style: DartDroidFonts.normal(fontSize: 16),

@@ -158,6 +158,19 @@ class AppRouter {
                 )
               : const AttendanceScreen(),
         );
+      case RouteName.profileDetailScreen:
+        return MaterialPageRoute(
+          settings: RouteSettings(
+            name: RouteName.profileDetailScreen,
+            arguments: args?.data,
+          ),
+          builder: (_) => args?.bloc != null
+              ? BlocProvider.value(
+                  value: args!.bloc!,
+                  child: const ProfileDetailScreen(),
+                )
+              : const ProfileDetailScreen(),
+        );
       default:
         return MaterialPageRoute(
           settings: const RouteSettings(
@@ -182,6 +195,8 @@ class RouteName {
   static const String detailLeaveScreen = "detailLeaveScreen";
 
   static const String attendanceScreen = "attendanceScreen";
+
+  static const String profileDetailScreen = "profileDetailScreen";
 
   static const String overtimeScreen = "overtimeScreen";
   static const String createOvertimeScreen = "createOvertimeScreen";

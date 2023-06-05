@@ -4,7 +4,6 @@ import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/core/core.dart';
 import 'package:hrd/src/ui/screen/home/home_screen.dart';
 import 'package:hrd/src/ui/screen/notification/notification_screen.dart';
-import 'package:hrd/src/ui/screen/profile/profile_screen.dart';
 
 import '../../ui.dart';
 
