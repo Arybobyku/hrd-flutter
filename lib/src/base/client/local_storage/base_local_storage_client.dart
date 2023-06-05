@@ -1,7 +1,7 @@
 /// Type definition for shared preference
 enum SharedPrefType {
-  STRING,
-  INT,
+  string,
+  int,
 }
 
 /// Local storage client

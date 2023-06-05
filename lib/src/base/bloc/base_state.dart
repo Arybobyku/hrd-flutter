@@ -5,7 +5,7 @@ abstract class BaseState<T> extends Equatable {
   final T? data;
   final DateTime? timestamp;
 
-  BaseState({
+  const BaseState({
     this.data,
     this.timestamp,
   });
@@ -21,7 +21,7 @@ abstract class BaseState<T> extends Equatable {
 ///
 /// Use it for initialization of the bloc
 class InitializedState<T> extends BaseState<T> {
-  InitializedState({
+  const InitializedState({
     DateTime? timestamp,
     T? data,
   }) : super(
@@ -40,7 +40,7 @@ class InitializedState<T> extends BaseState<T> {
 /// If the screen loads multiple data and needs more than one loading state,
 /// consider creating another micro loading state on the corresponding blocs
 class LoadingState<T> extends BaseState<T> {
-  LoadingState({
+  const LoadingState({
     DateTime? timestamp,
     T? data,
   }) : super(
@@ -48,6 +48,7 @@ class LoadingState<T> extends BaseState<T> {
           data: data,
         );
 
+  @override
   String toString() {
     return 'LoadingState { timestamp: $timestamp, data: $data }';
   }
@@ -61,7 +62,7 @@ class LoadingState<T> extends BaseState<T> {
 /// To indicate empty data, please consider use [EmptyState] instead of doing
 /// length checking on this state.
 class LoadedState<T> extends BaseState<T> {
-  LoadedState({
+  const LoadedState({
     DateTime? timestamp,
     T? data,
   }) : super(
@@ -79,7 +80,7 @@ class LoadedState<T> extends BaseState<T> {
 ///
 /// Don't use this state for blocs that responsible for loading data to the screen.
 class SuccessState<T> extends BaseState<T> {
-  SuccessState({
+  const SuccessState({
     DateTime? timestamp,
     T? data,
   }) : super(
@@ -97,7 +98,7 @@ class SuccessState<T> extends BaseState<T> {
 ///
 /// Use this state for indicate empty data if the data successfully loaded.
 class EmptyState<T> extends BaseState<T> {
-  EmptyState({
+  const EmptyState({
     DateTime? timestamp,
     T? data,
   }) : super(
@@ -124,7 +125,7 @@ class ErrorState<T> extends BaseState<T> {
   /// Exception provided for logging clarity
   final Object? exception;
 
-  ErrorState({
+  const ErrorState({
     required this.error,
     DateTime? timestamp,
     T? data,

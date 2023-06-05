@@ -7,15 +7,15 @@ class AttendanceHistoryCubit extends Cubit<BaseState> {
 
   AttendanceHistoryCubit({
     required this.attendanceRepository,
-  }) : super(InitializedState());
+  }) : super(const InitializedState());
 
   void initialize() async {
-    emit(LoadingState());
+    emit(const LoadingState());
     try {
       List<Attendance> attendances = await attendanceRepository.getAll();
 
       if (attendances.isEmpty) {
-        return emit(EmptyState());
+        return emit(const EmptyState());
       }
 
       emit(LoadedState(data: attendances));

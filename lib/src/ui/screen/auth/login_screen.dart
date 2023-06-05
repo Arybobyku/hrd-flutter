@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hrd/src/base/base.dart';
-import 'package:hrd/src/common/utility/dartdroid_fonts.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/core/bloc/authentication/authentication.dart';
 import 'package:hrd/src/ui/ui.dart';
@@ -45,6 +44,9 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin, WidgetMixin {
           child: BlocBuilder<AuthenticationActionCubit, BaseState<AuthMeta>>(
             builder: (context, state) {
               return FullLoading(
+                isLoading: (state is LoadingState &&
+                    state.data != null &&
+                    state.data?.type == AuthMetaType.signIn),
                 child: SingleChildScrollView(
                   child: Stack(
                     children: [
@@ -55,9 +57,6 @@ class LoginView extends StatelessWidget with SnackBarMessageMixin, WidgetMixin {
                     ],
                   ),
                 ),
-                isLoading: (state is LoadingState &&
-                    state.data != null &&
-                    state.data?.type == AuthMetaType.signIn),
               );
             },
           ),

@@ -39,7 +39,7 @@ class UserRepository implements BaseUserRepository {
     return await localStorageClient.saveByKey(
       jsonEncode(user.toJson()),
       SharedPrefKey.user,
-      SharedPrefType.STRING,
+      SharedPrefType.string,
     );
   }
 }

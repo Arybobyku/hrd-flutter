@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
-import 'package:hrd/src/core/bloc/authentication/authentication.dart';
-import 'package:hrd/src/core/bloc/landing/tab/landing_tab_cubit.dart';
 import 'package:hrd/src/core/core.dart';
 import 'package:hrd/src/ui/screen/home/home_screen.dart';
 import 'package:hrd/src/ui/screen/notification/notification_screen.dart';

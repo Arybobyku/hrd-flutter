@@ -40,7 +40,7 @@ class DioClient extends BaseApiClient with LogMixin {
     logE("${DateTime.now()} ${dioError.type} : ${dioError.error}");
 
     final token = await localStorageClient.getByKey(
-        SharedPrefKey.token, SharedPrefType.STRING);
+        SharedPrefKey.token, SharedPrefType.string);
 
     if (token != null && dioError.response?.statusCode == 401) {
       logD("TODO: REFRESH TOKEN");
@@ -50,7 +50,7 @@ class DioClient extends BaseApiClient with LogMixin {
   }
 
   Future<String?> getToken() async => await localStorageClient.getByKey(
-      SharedPrefKey.token, SharedPrefType.STRING) as String?;
+      SharedPrefKey.token, SharedPrefType.string) as String?;
 
   @override
   Future<Response> get(

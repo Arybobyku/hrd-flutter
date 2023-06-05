@@ -1,6 +1,6 @@
 /// Base class for application exceptions
 abstract class AppException implements Exception {
-  final data;
+  final dynamic data;
   final String prefix;
 
   AppException(

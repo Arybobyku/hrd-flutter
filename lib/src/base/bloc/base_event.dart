@@ -5,7 +5,7 @@ abstract class BaseEvent<T> extends Equatable {
   final T? data;
   final DateTime? timestamp;
 
-  BaseEvent({
+  const BaseEvent({
     this.data,
     this.timestamp,
   });
@@ -21,7 +21,7 @@ abstract class BaseEvent<T> extends Equatable {
 ///
 /// This state must be called after the instantiation of the blocs
 class InitializeEvent<T> extends BaseEvent<T> {
-  InitializeEvent({
+  const InitializeEvent({
     DateTime? timestamp,
     T? data,
   }) : super(
@@ -40,7 +40,7 @@ class InitializeEvent<T> extends BaseEvent<T> {
 /// If the bloc has multiple actions and needs more than one update state,
 /// consider creating another micro update state on the corresponding blocs
 class UpdateEvent<T> extends BaseEvent<T> {
-  UpdateEvent({
+  const UpdateEvent({
     DateTime? timestamp,
     T? data,
   }) : super(
@@ -64,7 +64,7 @@ class UpdateEvent<T> extends BaseEvent<T> {
 /// If the bloc has multiple actions and needs more than one update state,
 /// consider creating another micro update state on the corresponding blocs
 class RefreshEvent<T> extends BaseEvent<T> {
-  RefreshEvent({
+  const RefreshEvent({
     DateTime? timestamp,
     T? data,
   }) : super(

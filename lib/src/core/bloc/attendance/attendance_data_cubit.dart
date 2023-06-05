@@ -7,10 +7,10 @@ class AttendanceDataCubit extends Cubit<BaseState<Attendance?>> {
 
   AttendanceDataCubit({
     required this.attendanceRepository,
-  }) : super(InitializedState());
+  }) : super(const InitializedState());
 
   void initialize() async {
-    emit(LoadingState());
+    emit(const LoadingState());
     try {
       Attendance? attendance =
           await attendanceRepository.getCurrentDateAttendance();

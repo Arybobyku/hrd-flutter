@@ -6,16 +6,16 @@ class OvertimeDataCubit extends Cubit<BaseState> {
   final BaseOvertimeRepository overtimeRepository;
 
   OvertimeDataCubit({required this.overtimeRepository})
-      : super(InitializedState());
+      : super(const InitializedState());
 
   void initialize() async {
     try {
-      emit(LoadingState());
+      emit(const LoadingState());
 
       List<Overtime> overtimes = await overtimeRepository.getAllOvertime();
 
       if (overtimes.isEmpty) {
-        return emit(EmptyState());
+        return emit(const EmptyState());
       }
       return emit(
         LoadedState(

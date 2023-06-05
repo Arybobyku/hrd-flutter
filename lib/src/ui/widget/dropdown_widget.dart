@@ -101,7 +101,7 @@ class _DropDownWidgetState extends State<DropDownWidget> with WidgetMixin {
     if (widget.customErrorWithoutValidator?.isNotEmpty ?? false) {
       _isErrorCustomMessage = true;
     }
-    bool _hasError = _isErrorWithValidatorKey || _isErrorCustomMessage;
+    bool hasError = _isErrorWithValidatorKey || _isErrorCustomMessage;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,7 +187,7 @@ class _DropDownWidgetState extends State<DropDownWidget> with WidgetMixin {
                 },
           ),
         ),
-        if (_hasError && widget.customErrorWithoutValidator != null) ...[
+        if (hasError && widget.customErrorWithoutValidator != null) ...[
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 6),
             child: Text(

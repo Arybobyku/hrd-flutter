@@ -8,10 +8,10 @@ class AttendanceActionCubit extends Cubit<BaseState> {
 
   AttendanceActionCubit({
     required this.attendanceRepository,
-  }) : super(InitializedState());
+  }) : super(const InitializedState());
 
   void clockIn({required String? shiftId}) async {
-    emit(LoadingState());
+    emit(const LoadingState());
 
     try {
       String clockInTime = DateTime.now().generalFormatTime;
@@ -26,7 +26,7 @@ class AttendanceActionCubit extends Cubit<BaseState> {
       );
 
       if (meta.code.success) {
-        return emit(SuccessState());
+        return emit(const SuccessState());
       } else {
         return  emit(ErrorState(error: meta.message));
       }
@@ -36,7 +36,7 @@ class AttendanceActionCubit extends Cubit<BaseState> {
   }
 
   void clockOut({required String? id}) async {
-    emit(LoadingState());
+    emit(const LoadingState());
 
     try {
       String clockOutTime = DateTime.now().generalFormatTime;
@@ -48,7 +48,7 @@ class AttendanceActionCubit extends Cubit<BaseState> {
         ),
       );
       if (meta.code.success) {
-        emit(SuccessState());
+        emit(const SuccessState());
       } else {
         emit(ErrorState(error: meta.message));
       }

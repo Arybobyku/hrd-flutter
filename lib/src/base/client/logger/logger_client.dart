@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hrd/src/common/common.dart';
 
 import 'logger.dart';
 
-class LoggerClient extends BaseLoggerClient with LogMixin{
+class LoggerClient extends BaseLoggerClient with LogMixin {
   LoggerClient();
 
   @override

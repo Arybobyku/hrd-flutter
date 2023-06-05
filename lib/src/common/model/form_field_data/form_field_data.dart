@@ -12,14 +12,14 @@ class FormFieldData<T> {
   });
 
   bool get hasEmptyField => validate.any((element) {
-    bool _validation = element == null;
+    bool validation = element == null;
     if (element is List || element is Map) {
-      _validation = _validation || element.isEmpty;
+      validation = validation || element.isEmpty;
     }
     if (element is String) {
-      _validation = _validation || element.trim().isEmpty;
+      validation = validation || element.trim().isEmpty;
     }
 
-    return _validation;
+    return validation;
   });
 }

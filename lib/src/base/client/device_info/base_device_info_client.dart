@@ -1,6 +1,7 @@
 import 'dart:io' show Platform;
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/material.dart';
 
 part 'device_info_client.dart';
 

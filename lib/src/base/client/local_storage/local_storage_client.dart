@@ -23,12 +23,12 @@ class SharedPrefClient extends BaseLocalStorageClient {
   @override
   Future getByKey(String key, SharedPrefType type) async {
     try {
-      var data;
+      dynamic data;
       SharedPreferences client = await _client;
 
-      if (type == SharedPrefType.STRING) {
+      if (type == SharedPrefType.string) {
         data = client.getString(key);
-      } else if (type == SharedPrefType.INT) {
+      } else if (type == SharedPrefType.int) {
         data = client.getInt(key);
       }
 
@@ -42,9 +42,9 @@ class SharedPrefClient extends BaseLocalStorageClient {
   Future<void> saveByKey(data, String key, SharedPrefType type) async {
     SharedPreferences client = await _client;
 
-    if (type == SharedPrefType.STRING) {
+    if (type == SharedPrefType.string) {
       await client.setString(key, data);
-    } else if (type == SharedPrefType.INT) {
+    } else if (type == SharedPrefType.int) {
       await client.setInt(key, data);
     }
 

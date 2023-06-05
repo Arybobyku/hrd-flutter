@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hrd/src/common/utility/dartdroid_fonts.dart';
 import 'package:hrd/src/common/common.dart';
 
 class ButtonRounded extends StatelessWidget {

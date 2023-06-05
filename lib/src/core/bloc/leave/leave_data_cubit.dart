@@ -5,16 +5,16 @@ import 'package:hrd/src/core/core.dart';
 class LeaveDataCubit extends Cubit<BaseState<List<Leave>>> {
   final BaseLeaveRepository leaveRepository;
 
-  LeaveDataCubit({required this.leaveRepository}) : super(InitializedState());
+  LeaveDataCubit({required this.leaveRepository}) : super(const InitializedState());
 
   void initialize() async {
     try {
-      emit(LoadingState());
+      emit(const LoadingState());
 
       List<Leave> leaves = await leaveRepository.getAllTimeOff();
 
       if (leaves.isEmpty) {
-        return emit(EmptyState());
+        return emit(const EmptyState());
       }
       return emit(
         LoadedState(

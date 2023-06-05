@@ -1,13 +1,13 @@
 import 'package:hrd/src/base/base.dart';
 
 class AuthenticatedState<User> extends BaseState<User> {
-  AuthenticatedState({
+  const AuthenticatedState({
     DateTime? timestamp,
     User? data,
   }) : super(
-    timestamp: timestamp,
-    data: data,
-  );
+          timestamp: timestamp,
+          data: data,
+        );
 
   @override
   String toString() {
@@ -18,14 +18,14 @@ class AuthenticatedState<User> extends BaseState<User> {
 class UnauthenticatedState<T> extends BaseState<T> {
   final String? message;
 
-  UnauthenticatedState({
+  const UnauthenticatedState({
     DateTime? timestamp,
     T? data,
     this.message,
   }) : super(
-    timestamp: timestamp,
-    data: data,
-  );
+          timestamp: timestamp,
+          data: data,
+        );
 
   @override
   String toString() {

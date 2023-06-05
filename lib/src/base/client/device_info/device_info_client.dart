@@ -25,13 +25,13 @@ class DeviceInfo implements BaseDeviceInfoClient {
       try {
         _androidDeviceInfo = await _deviceInfo!.androidInfo;
       } catch (e) {
-        print(e);
+        debugPrint(e.toString());
       }
     } else if (isIos) {
       try {
         _iosDeviceInfo = await _deviceInfo!.iosInfo;
       } catch (e) {
-        print(e);
+        debugPrint(e.toString());
       }
       _iosDeviceInfo = await _deviceInfo!.iosInfo;
     }

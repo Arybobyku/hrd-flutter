@@ -95,9 +95,11 @@ android {
         dev {
             dimension "environment"
             applicationIdSuffix ".dev"
+            resValue "string", "app_name", "HRD DEV"
         }
         prod {
             dimension "environment"
+            resValue "string", "app_name", "HRD"
         }
     }
 

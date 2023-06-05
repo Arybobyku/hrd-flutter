@@ -18,7 +18,7 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
   @override
   Future getUSerFromLocalStorage() => localStorageClient.getByKey(
         SharedPrefKey.user,
-        SharedPrefType.STRING,
+        SharedPrefType.string,
       );
 
   @override
@@ -39,11 +39,11 @@ class AuthenticationRepository implements BaseAuthenticationRepository {
   @override
   Future<void> saveUserToLocalStorage(User user) async {
     await localStorageClient.saveByKey(
-        user.accessToken, SharedPrefKey.token, SharedPrefType.STRING);
+        user.accessToken, SharedPrefKey.token, SharedPrefType.string);
     return await localStorageClient.saveByKey(
       jsonEncode(user.toJson()),
       SharedPrefKey.user,
-      SharedPrefType.STRING,
+      SharedPrefType.string,
     );
   }
 

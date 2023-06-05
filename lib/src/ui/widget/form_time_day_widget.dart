@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hrd/src/common/common.dart';
-import 'package:hrd/src/common/extension/time_extension.dart';
 
-class FormTimeDayWidget extends StatelessWidget with WidgetMixin{
-   FormTimeDayWidget({
+class FormTimeDayWidget extends StatelessWidget with WidgetMixin {
+  FormTimeDayWidget({
     Key? key,
     this.title,
     this.titleStyle,

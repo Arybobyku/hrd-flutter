@@ -1,6 +1,5 @@
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
-import 'package:hrd/src/common/constant/string_constants.dart';
 
 import '../../core.dart';
 
@@ -9,7 +8,7 @@ class AuthenticationActionCubit extends Cubit<BaseState<AuthMeta>> {
 
   AuthenticationActionCubit({
     required this.authenticationRepository,
-  }) : super(InitializedState());
+  }) : super(const InitializedState());
 
   void signIn({
     required String userName,
@@ -89,7 +88,6 @@ class AuthenticationActionCubit extends Cubit<BaseState<AuthMeta>> {
       await authenticationRepository.signOut(token);
 
       await authenticationRepository.resetLocalStorage();
-
     } catch (e) {
       emit(
         ErrorState(

@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hrd/src/app_router.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
-import 'package:hrd/src/core/bloc/attendance/attendance.dart';
-import 'package:hrd/src/core/bloc/authentication/authentication.dart';
 import 'package:hrd/src/core/core.dart';
 import 'package:hrd/src/ui/ui.dart';
 
-part 'part/home_screen_header.dart';
-
 part 'part/home_activity.dart';
-
 part 'part/home_menu.dart';
+part 'part/home_screen_header.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

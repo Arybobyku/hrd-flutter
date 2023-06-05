@@ -13,7 +13,7 @@ class AuthenticationDataCubit extends Cubit<BaseState> {
   AuthenticationDataCubit({
     required this.clock,
     required this.authenticationRepository,
-  }) : super(InitializedState());
+  }) : super(const InitializedState());
 
   void initialize() async {
     String? rawUser;
@@ -25,7 +25,7 @@ class AuthenticationDataCubit extends Cubit<BaseState> {
       }
 
       if (user == null) {
-        return emit(UnauthenticatedState());
+        return emit(const UnauthenticatedState());
       }
 
       emit(AuthenticatedState(data: user));

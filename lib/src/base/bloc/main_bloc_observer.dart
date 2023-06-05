@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../client/logger/base_logger_client.dart';
@@ -23,7 +24,7 @@ class MainBlocObserver extends BlocObserver {
             (change.nextState as ErrorState).error,
       );
     } else {
-      print('${bloc.runtimeType} $change');
+      debugPrint('${bloc.runtimeType} $change');
     }
   }
 
@@ -40,7 +41,7 @@ class MainBlocObserver extends BlocObserver {
         exception: error,
       );
     } else {
-      print('${bloc.runtimeType} $error $stackTrace');
+      debugPrint('${bloc.runtimeType} $error $stackTrace');
     }
   }
 }

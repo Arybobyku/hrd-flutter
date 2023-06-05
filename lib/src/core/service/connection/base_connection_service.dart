@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:hrd/src/common/common.dart';
 
 part 'connection_service.dart';
 

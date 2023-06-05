@@ -5,10 +5,10 @@ import 'package:hrd/src/core/core.dart';
 class UserCubit extends Cubit<BaseState> {
   final BaseUserRepository userRepository;
 
-  UserCubit({required this.userRepository}) : super(InitializedState());
+  UserCubit({required this.userRepository}) : super(const InitializedState());
 
   Future<void> initialize() async {
-    emit(LoadingState());
+    emit(const LoadingState());
 
     try {
       User? user = await userRepository.getMe();
@@ -19,7 +19,7 @@ class UserCubit extends Cubit<BaseState> {
         emit(LoadedState(data: user));
       }
 
-      emit(EmptyState());
+      emit(const EmptyState());
     } catch (e) {
       emit(ErrorState(error: e.toString()));
     }
