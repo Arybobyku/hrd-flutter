@@ -9,7 +9,7 @@ abstract class AppException implements Exception {
   );
 
   @override
-  String toString() => "$prefix$data";
+  String toString() => "$data";
 }
 
 /// Default HTTP exception for undefined status error

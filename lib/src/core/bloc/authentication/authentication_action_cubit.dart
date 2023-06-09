@@ -77,7 +77,7 @@ class AuthenticationActionCubit extends Cubit<BaseState<AuthMeta>> {
     emit(SuccessState(data: AuthMeta(type: AuthMetaType.signIn)));
   }
 
-  void signOut(String token) async {
+  void signOut(String? token) async {
     emit(
       LoadingState(
         data: AuthMeta(type: AuthMetaType.signOut),
@@ -85,7 +85,9 @@ class AuthenticationActionCubit extends Cubit<BaseState<AuthMeta>> {
     );
 
     try {
-      await authenticationRepository.signOut(token);
+      if(token!=null){
+        await authenticationRepository.signOut(token);
+      }
 
       await authenticationRepository.resetLocalStorage();
     } catch (e) {

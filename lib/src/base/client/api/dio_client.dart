@@ -39,11 +39,41 @@ class DioClient extends BaseApiClient with LogMixin {
       ErrorInterceptorHandler errorInterceptorHandler) async {
     logE("${DateTime.now()} ${dioError.type} : ${dioError.error}");
 
-    final token = await localStorageClient.getByKey(
-        SharedPrefKey.token, SharedPrefType.string);
+    try {
+      final token = await localStorageClient.getByKey(
+        SharedPrefKey.token,
+        SharedPrefType.string,
+      );
 
-    if (token != null && dioError.response?.statusCode == 401) {
-      logD("TODO: REFRESH TOKEN");
+      if (token != null && dioError.response?.statusCode == 401) {
+        logD("TODO: REFRESH TOKEN");
+
+        //TODO: REFRESH TOKEN
+        // var rawUser = await localStorageClient.getByKey(
+        //   SharedPrefKey.user,
+        //   SharedPrefType.string,
+        // );
+        //
+        // if (rawUser != null) {
+        //   var user = User.fromJson(jsonDecode(rawUser));
+        //   Response response = await post(
+        //     Url.baseUrl + Url.login,
+        //     queryParams: {
+        //       'email': user.email,
+        //       'password': user.pas,
+        //     },
+        //   );
+        //
+        //   var accessToken = response.data['data']['access-token'];
+        //   await localStorageClient.saveByKey(
+        //     accessToken,
+        //     SharedPrefKey.token,
+        //     SharedPrefType.string,
+        //   );
+        // }
+      }
+    } catch (e) {
+      debugPrint("ERROR REFRESH TOKEN: $e");
     }
 
     errorInterceptorHandler.next(dioError);
@@ -61,7 +91,9 @@ class DioClient extends BaseApiClient with LogMixin {
     Map<String, dynamic>? headers,
     int msTimeout = 10000,
   }) async {
-    Map<String, dynamic> headers0 = <String, dynamic>{};
+    Map<String, dynamic> headers0 = <String, dynamic>{
+      "Accept": "application/json",
+    };
 
     if (headers != null) {
       headers.forEach((k, v) => headers0[k] = v);
@@ -283,7 +315,7 @@ class DioClient extends BaseApiClient with LogMixin {
 _returnResponse(Response? responseDio) {
   dynamic response = responseDio;
   try {
-    if(responseDio!.statusCode! >= 300){
+    if (responseDio!.statusCode! >= 300) {
       response =
           BaseResponse.fromJson(responseDio.data, (json) => null).meta.message;
     }

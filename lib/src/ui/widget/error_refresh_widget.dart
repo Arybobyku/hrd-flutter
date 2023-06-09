@@ -27,7 +27,7 @@ class ErrorRefreshWidget extends StatelessWidget with WidgetMixin {
                   Text(
                     message,
                     textAlign: TextAlign.center,
-                    style: DartDroidFonts.bold(fontSize: 26),
+                    style: DartDroidFonts.bold(fontSize: 18),
                   )
                 ],
               ),

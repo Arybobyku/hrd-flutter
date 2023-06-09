@@ -112,7 +112,7 @@ class ProfileView extends StatelessWidget with WidgetMixin {
                           invert: true,
                           onPressed: () => context
                               .read<AuthenticationActionCubit>()
-                              .signOut(user.accessToken!),
+                              .signOut(user?.accessToken),
                         ),
                       ],
                     ),
