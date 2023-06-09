@@ -176,7 +176,7 @@ class ProfileDetailView extends StatelessWidget with WidgetMixin {
                   value: user?.employee?.joinDate ?? "-",
                 ),
                 TitleValueWidget(
-                  title: "Status",
+                  title: "Shift",
                   value: user?.userShift?.shift?.name ?? "-",
                 ),
                 verticalSpace20,
