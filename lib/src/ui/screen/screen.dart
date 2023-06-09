@@ -6,3 +6,4 @@ export 'overtime/overtime.dart';
 export 'attendance/attendance_screen.dart';
 export 'profile/profile_screen.dart';
 export 'profile/detail/profile_detail_screen.dart';
+export 'announcement/announcement_screen.dart';

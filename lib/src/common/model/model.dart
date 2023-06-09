@@ -12,3 +12,4 @@ export 'form_field_data/form_field_data.dart';
 export 'attendance/attendance.dart';
 export 'shift/shift.dart';
 export 'user_shift/user_shift.dart';
+export 'announcement/announcement.dart';

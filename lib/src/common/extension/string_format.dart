@@ -10,4 +10,10 @@ extension StringFormatMixin on String? {
 
     return DateFormat("HH:mm").format(parsedDate).toString();
   }
+
+  String get dateFormat{
+    var parsedDate = DateTime.parse(this!);
+
+    return DateFormat("dd MMMM yyyy").format(parsedDate).toString();
+  }
 }

@@ -6,4 +6,5 @@ class Asset {
   static String iconSuccess = 'assets/icons/success.svg';
   static String iconReport = 'assets/icons/report.png';
   static String iconAttendance = 'assets/icons/attendance.png';
+  static String iconAnnouncement = 'assets/icons/announcement.png';
 }

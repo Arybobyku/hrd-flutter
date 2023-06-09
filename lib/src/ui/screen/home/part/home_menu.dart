@@ -19,6 +19,11 @@ class HomeMenu extends StatelessWidget with WidgetMixin {
       icon: Asset.iconAttendance,
       navigate: RouteName.attendanceScreen,
     ),
+    Menu(
+      label: "Pengumuman",
+      icon: Asset.iconAnnouncement,
+      navigate: RouteName.announcementScreen,
+    ),
   ];
 
   @override

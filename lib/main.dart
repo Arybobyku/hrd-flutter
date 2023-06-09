@@ -53,6 +53,11 @@ void main() async {
     localStorageClient: localStorageClient,
   );
 
+  final BaseAnnouncementRepository announcementRepository =
+      AnnouncementRepository(
+    apiClient: apiClient,
+  );
+
   // Disable Landscape Mode
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
@@ -79,6 +84,7 @@ void main() async {
         overtimeRepository: overtimeRepository,
         attendanceRepository: attendanceRepository,
         userRepository: userRepository,
+        announcementRepository: announcementRepository,
       ),
     ),
   );

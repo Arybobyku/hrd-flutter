@@ -67,8 +67,7 @@ dependencies:
   image_gallery_saver: ^1.7.1
   intl:
   flutter_svg: ^2.0.0
-
-  # Client
+# Client
 #  background_fetch: ^1.0.3
   geolocator: ^8.2.0
   geocoding: ^2.0.4

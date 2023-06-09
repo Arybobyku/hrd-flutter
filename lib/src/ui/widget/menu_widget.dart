@@ -34,12 +34,14 @@ class MenuWidget extends StatelessWidget with WidgetMixin{
             ),
           ),
         ),
-        verticalSpace5,
+        verticalSpace(2),
         Text(
           label,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: DartDroidFonts.customFontWeight(
             fontWeight: FontWeight.w600,
-            fontSize: 14,
+            fontSize: 12,
           ),
         ),
       ],
