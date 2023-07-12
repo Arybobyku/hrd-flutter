@@ -45,7 +45,7 @@ class DetailLeaveView extends StatelessWidget with WidgetMixin {
                       Expanded(
                         child: TitleValueWidget(
                           title: "Jenis Cuti",
-                          value: leave.type ?? "-",
+                          value: leave.timeOffPolicy?.name ?? "-",
                         ),
                       ),
                       StatusCard(status: leave.status ?? "-")

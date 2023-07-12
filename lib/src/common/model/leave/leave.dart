@@ -10,8 +10,10 @@ class Leave extends BaseModel {
   final String? reasons;
   final String? note;
   final String? type;
+  final int? totalDays;
   final String? createdAt;
   final String? updatedAt;
+  final TimeOffPolicy? timeOffPolicy;
 
   Leave({
     this.id,
@@ -25,6 +27,8 @@ class Leave extends BaseModel {
     this.note,
     this.type,
     this.reasons,
+    this.timeOffPolicy,
+    this.totalDays,
   });
 
   @override
@@ -34,31 +38,37 @@ class Leave extends BaseModel {
   }
 
   factory Leave.fromJsonApi(Map<String, dynamic> json) => Leave(
-    id: json['id'],
-    userId: json['user_id'],
-    startDate: json['start_date'],
-    endDate: json['end_date'],
-    status: json['status'],
-    approvalDate: json['approval_date'],
-    note: json['note'],
-    type: json['type'],
-    createdAt: json['created_at'],
-    updatedAt: json['updated_at'],
-    reasons: json['reasons'],
-  );
+        id: json['id'],
+        userId: json['user_id'],
+        startDate: json['start_date'],
+        endDate: json['end_date'],
+        status: json['status'],
+        approvalDate: json['approval_date'],
+        note: json['note'],
+        type: json['type'],
+        createdAt: json['created_at'],
+        updatedAt: json['updated_at'],
+        reasons: json['reasons'],
+        totalDays: json['total_days'],
+        timeOffPolicy: json['time_off_policy'] != null
+            ? TimeOffPolicy.fromJsonApi(json['time_off_policy'])
+            : null,
+      );
 
   @override
   List<Object?> get props => [
-    id,
-    userId,
-    startDate,
-    endDate,
-    status,
-    createdAt,
-    updatedAt,
-    approvalDate,
-    note,
-    reasons,
-    type,
-  ];
+        id,
+        userId,
+        startDate,
+        endDate,
+        status,
+        createdAt,
+        updatedAt,
+        approvalDate,
+        note,
+        reasons,
+        type,
+        timeOffPolicy,
+        totalDays,
+      ];
 }

@@ -7,12 +7,14 @@ class LeaveFormData extends BaseModel {
   final DateTime? startDate;
   final DateTime? endDate;
   final String? reasons;
+  final String? totalDays;
 
   LeaveFormData({
     this.leaveTypes,
     this.startDate,
     this.endDate,
     this.reasons,
+    this.totalDays,
   });
 
   @override
@@ -21,6 +23,7 @@ class LeaveFormData extends BaseModel {
     startDate,
     endDate,
     reasons,
+    totalDays,
   ];
 
   @override
@@ -29,11 +32,13 @@ class LeaveFormData extends BaseModel {
     DateTime? startDate,
     DateTime? endDate,
     String? reasons,
+    String? totalDays,
   }) =>
       LeaveFormData(
         leaveTypes: leaveTypes ?? this.leaveTypes,
         startDate: startDate ?? this.startDate,
         endDate: endDate ?? this.endDate,
         reasons: reasons ?? this.reasons,
+        totalDays: totalDays ?? this.totalDays,
       );
 }

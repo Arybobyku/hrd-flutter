@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hrd/src/app_router.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
+import 'package:hrd/src/core/repository/timeoffPolicy/base_timeoff_policy_repository.dart';
 
 import 'core/core.dart';
 
@@ -20,6 +21,8 @@ class App extends StatelessWidget {
   final BaseAttendanceRepository attendanceRepository;
   final BaseUserRepository userRepository;
   final BaseAnnouncementRepository announcementRepository;
+  final BaseShiftRepository shiftRepository;
+  final BaseTimeOffPolicyRepository timeOffPolicyRepository;
 
   const App({
     Key? key,
@@ -31,6 +34,8 @@ class App extends StatelessWidget {
     required this.attendanceRepository,
     required this.userRepository,
     required this.announcementRepository,
+    required this.shiftRepository,
+    required this.timeOffPolicyRepository,
   }) : super(key: key);
 
   @override
@@ -43,6 +48,8 @@ class App extends StatelessWidget {
         RepositoryProvider(create: (context) => attendanceRepository),
         RepositoryProvider(create: (context) => userRepository),
         RepositoryProvider(create: (context) => announcementRepository),
+        RepositoryProvider(create: (context) => shiftRepository),
+        RepositoryProvider(create: (context) => timeOffPolicyRepository),
       ],
       child: MultiBlocProvider(
         providers: [

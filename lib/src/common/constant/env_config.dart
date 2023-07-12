@@ -14,7 +14,7 @@ class EnvConfig {
   );
   static const baseUrl = String.fromEnvironment(
     'BASE_URL',
-    defaultValue: 'http://192.168.1.4/hrd-web/public/api'
+    defaultValue: 'http://192.168.1.13/hrd-web/public/api'
   );
 
   static get uriBaseUrl => Uri.parse(baseUrl);

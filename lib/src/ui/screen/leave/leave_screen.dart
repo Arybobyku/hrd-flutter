@@ -93,8 +93,8 @@ class LeaveView extends StatelessWidget with WidgetMixin {
                         );
                       },
                       child: ReportCard(
-                        title: listLeave[index].type ?? "-",
-                        value: "${listLeave[index].reasons}",
+                        title: listLeave[index].timeOffPolicy?.name ?? "-",
+                        value: "${listLeave[index].totalDays ?? "-"} Hari",
                         status: listLeave[index].status ?? "-",
                       ),
                     );

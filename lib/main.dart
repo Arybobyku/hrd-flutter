@@ -7,6 +7,8 @@ import 'package:hrd/src/base/client/local_storage/base_local_storage_client.dart
 import 'package:hrd/src/base/client/local_storage/local_storage_client.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/core/core.dart';
+import 'package:hrd/src/core/repository/timeoffPolicy/base_timeoff_policy_repository.dart';
+import 'package:hrd/src/core/repository/timeoffPolicy/timeoff_policy.dart';
 import 'package:hrd/src/ui/widget/banner/dartdroid_banner_card.dart';
 
 void main() async {
@@ -58,6 +60,15 @@ void main() async {
     apiClient: apiClient,
   );
 
+  final BaseShiftRepository shiftRepository = ShiftRepository(
+    apiClient: apiClient,
+  );
+
+  final BaseTimeOffPolicyRepository timeOffPolicyRepository =
+      TimeOffPolicyRepository(
+    apiClient: apiClient,
+  );
+
   // Disable Landscape Mode
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
@@ -85,6 +96,8 @@ void main() async {
         attendanceRepository: attendanceRepository,
         userRepository: userRepository,
         announcementRepository: announcementRepository,
+        shiftRepository: shiftRepository,
+        timeOffPolicyRepository: timeOffPolicyRepository,
       ),
     ),
   );

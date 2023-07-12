@@ -22,6 +22,11 @@ class CreateLeaveFormCubit extends Cubit<BaseState<LeaveFormData>> {
     emit(LoadedState(data: latestFormData));
   }
 
+  void updateFormTotalDays(LeaveFormData latestFormData, String value) {
+    latestFormData = latestFormData.copyWith(totalDays: value);
+    emit(LoadedState(data: latestFormData));
+  }
+
   void updateFormEndData(LeaveFormData latestFormData, DateTime value) {
     latestFormData = latestFormData.copyWith(endDate: value);
     emit(LoadedState(data: latestFormData));

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hrd/src/base/base.dart';
 import 'package:hrd/src/common/common.dart';
 import 'package:hrd/src/core/core.dart';
+import 'package:hrd/src/core/repository/timeoffPolicy/base_timeoff_policy_repository.dart';
 import 'package:hrd/src/ui/ui.dart';
 
 class CreateLeaveScreen extends StatefulWidget {
@@ -23,6 +24,15 @@ class _CreateLeaveScreenState extends State<CreateLeaveScreen> {
               CreateLeaveFormCubit(
             leaveRepository: context.read<BaseLeaveRepository>(),
           ),
+        ),
+        BlocProvider(
+          create: (
+            context,
+          ) =>
+              CreateLeaveActionCubit(
+            timeOffPolicyRepository:
+                context.read<BaseTimeOffPolicyRepository>(),
+          )..initialize(),
         )
       ],
       child: CreateLeaveView(),
@@ -68,18 +78,33 @@ class CreateLeaveView extends StatelessWidget
                     child: Column(
                       children: [
                         verticalSpace20,
-                        DropDownWidget(
-                          title: "Jenis Cuti",
-                          isRequired: true,
-                          hint: "Jenis Cuti",
-                          items: StringConstants.leaveTypes
-                              .map((e) => {"key": e, "value": e})
-                              .toList(),
-                          callbackWithoutValidator: (val) {
-                            context
-                                .read<CreateLeaveFormCubit>()
-                                .updateFormLeaveType(
-                                    state.data!, val!.values.first);
+                        BlocBuilder<CreateLeaveActionCubit, BaseState>(
+                          builder: (context, actionState) {
+                            if (actionState is LoadingState) {
+                              return const DisablerWidget(
+                                disable: true,
+                                child: DropDownWidget(
+                                  title: "Jenis Cuti",
+                                  isRequired: true,
+                                  hint: "Loading ...",
+                                ),
+                              );
+                            }
+
+                            return DropDownWidget(
+                              title: "Jenis Cuti",
+                              isRequired: true,
+                              hint: "Jenis Cuti",
+                              items: (actionState.data as List<TimeOffPolicy>)
+                                  .map((e) => {"key": e.id, "value": e.name})
+                                  .toList(),
+                              callbackWithoutValidator: (val) {
+                                context
+                                    .read<CreateLeaveFormCubit>()
+                                    .updateFormLeaveType(
+                                        state.data!, val!.values.first);
+                              },
+                            );
                           },
                         ),
                         verticalSpace20,
@@ -137,6 +162,15 @@ class CreateLeaveView extends StatelessWidget
                         ),
                         verticalSpace20,
                         TextFormFieldRounded(
+                          title: 'Total Hari',
+                          isRequired: true,
+                          keyboardType: TextInputType.number,
+                          onChange: (val) => context
+                              .read<CreateLeaveFormCubit>()
+                              .updateFormTotalDays(state.data!, val),
+                        ),
+                        verticalSpace20,
+                        TextFormFieldRounded(
                           title: 'Alasan',
                           isRequired: true,
                           minLines: 5,
@@ -153,6 +187,7 @@ class CreateLeaveView extends StatelessWidget
                               state.data!.reasons,
                               state.data!.startDate,
                               state.data!.endDate,
+                              state.data!.totalDays,
                             ],
                           ),
                           builder: (context, validateState) {
